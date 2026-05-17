@@ -8,7 +8,8 @@
     activeTab: 'overview', 
         showActivityModal: false, 
         showInviteModal: false,
-        showExpenseModal: false
+        showExpenseModal: false,
+        showBudgetModal: false
      }"
      @keydown.escape.window="showActivityModal = false; showInviteModal = false">
     {{-- Trip Header Section --}}
@@ -288,35 +289,95 @@
                             <p class="text-slate-500 text-sm mt-1">Track your spending for this trip.</p>
                         </div>
                         @if($trip->user_id === Auth::id())
-                            <button @click="showExpenseModal = true" class="btn-primary py-2.5 px-5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-lg shadow-[#FF52A7]/20 hover:-translate-y-0.5 transition-transform">
-                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
-                                Add Expense
-                            </button>
+                            <div class="flex items-center gap-3">
+                                @if(!$trip->budget)
+                                    <button @click="showBudgetModal = true" class="btn-primary py-2.5 px-5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-lg shadow-[#FF52A7]/20 hover:-translate-y-0.5 transition-transform">
+                                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
+                                        Add Budget
+                                    </button>
+                                @else
+                                    <button @click="showBudgetModal = true" class="px-4 py-2.5 rounded-xl text-xs font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 transition-colors flex items-center justify-center gap-2">
+                                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                                        Update Budget
+                                    </button>
+                                    <button @click="showExpenseModal = true" class="btn-primary py-2.5 px-5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-lg shadow-[#FF52A7]/20 hover:-translate-y-0.5 transition-transform">
+                                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
+                                        Add Expense
+                                    </button>
+                                @endif
+                            </div>
                         @endif
                     </div>
                     
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                         <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100 relative overflow-hidden group hover:border-[#FF52A7]/30 transition-colors">
                             <p class="text-slate-500 text-sm font-medium mb-1 relative z-10">Total Budget</p>
-                            <p class="text-3xl font-black text-[#071022] relative z-10">$0.00</p>
+                            <p class="text-3xl font-black text-[#071022] relative z-10">₹{{ number_format($trip->budget ?? 0, 2) }}</p>
                         </div>
                         <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100 relative overflow-hidden group hover:border-[#FF52A7]/30 transition-colors">
                             <p class="text-slate-500 text-sm font-medium mb-1 relative z-10">Total Spent</p>
-                            <p class="text-3xl font-black text-[#FF52A7] relative z-10">$0.00</p>
+                            <p class="text-3xl font-black text-[#FF52A7] relative z-10">₹{{ number_format($totalSpent, 2) }}</p>
                         </div>
                         <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100 relative overflow-hidden group hover:border-emerald-500/30 transition-colors">
                             <p class="text-slate-500 text-sm font-medium mb-1 relative z-10">Remaining</p>
-                            <p class="text-3xl font-black text-emerald-500 relative z-10">$0.00</p>
+                            <p class="text-3xl font-black {{ $remaining < 0 ? 'text-red-500' : 'text-emerald-500' }} relative z-10">₹{{ number_format($remaining, 2) }}</p>
                         </div>
                     </div>
 
-                    <div class="text-center py-16 border-2 border-dashed border-slate-200 rounded-2xl bg-slate-50/50">
-                        <div class="w-20 h-20 bg-white rounded-full shadow-sm flex items-center justify-center text-slate-300 mx-auto mb-5 border border-slate-100">
-                            <svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                    @if($trip->expenses->isEmpty() && !$trip->budget)
+                        <div class="text-center py-16 border-2 border-dashed border-slate-200 rounded-2xl bg-slate-50/50">
+                            <div class="w-20 h-20 bg-white rounded-full shadow-sm flex items-center justify-center text-slate-300 mx-auto mb-5 border border-slate-100">
+                                <svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                            </div>
+                            <h3 class="text-xl font-bold text-[#071022]">No transactions yet</h3>
+                            <p class="text-slate-500 text-sm mt-2 max-w-sm mx-auto">Set a budget or start tracking your spending for this trip.</p>
                         </div>
-                        <h3 class="text-xl font-bold text-[#071022]">No expenses recorded</h3>
-                        <p class="text-slate-500 text-sm mt-2 max-w-sm mx-auto">Start tracking your spending to stay within your trip's budget limit.</p>
-                    </div>
+                    @else
+                        {{-- Transaction List --}}
+                        <div class="space-y-4">
+                            @foreach($trip->expenses->sortByDesc('created_at') as $transaction)
+                                @if($transaction->type === 'expense')
+                                    <div class="flex items-center justify-between p-4 bg-white border border-slate-100 rounded-2xl hover:shadow-sm transition-shadow">
+                                        <div class="flex items-center gap-4">
+                                            <div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center text-red-500">
+                                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/></svg>
+                                            </div>
+                                            <div>
+                                                <p class="text-sm font-bold text-[#071022]">{{ $transaction->title }}</p>
+                                                <div class="flex items-center gap-2 mt-0.5">
+                                                    <p class="text-xs text-slate-500 uppercase tracking-widest">{{ $transaction->category }}</p>
+                                                    @if($transaction->user)
+                                                        <span class="w-1 h-1 rounded-full bg-slate-300"></span>
+                                                        <p class="text-[10px] text-slate-400 font-medium tracking-wide">Added by {{ $transaction->user->name }}</p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="text-base font-black text-red-500">- ₹{{ number_format($transaction->amount, 2) }}</p>
+                                    </div>
+                                @else
+                                    <div class="flex items-center justify-between p-4 bg-white border border-slate-100 rounded-2xl hover:shadow-sm transition-shadow">
+                                        <div class="flex items-center gap-4">
+                                            <div class="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-500">
+                                                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                                            </div>
+                                            <div>
+                                                <p class="text-sm font-bold text-[#071022]">{{ $transaction->title }}</p>
+                                                <div class="flex items-center gap-2 mt-0.5">
+                                                    <p class="text-xs text-slate-500 uppercase tracking-widest">BUDGET</p>
+                                                    @if($transaction->user)
+                                                        <span class="w-1 h-1 rounded-full bg-slate-300"></span>
+                                                        <p class="text-[10px] text-slate-400 font-medium tracking-wide">Added by {{ $transaction->user->name }}</p>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p class="text-base font-black text-emerald-500">+ ₹{{ number_format($transaction->amount, 2) }}</p>
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
             @else
                 <div class="bg-gradient-to-br from-[#071022] to-[#1a2942] rounded-3xl p-10 md:p-16 text-center flex flex-col items-center justify-center space-y-8 relative overflow-hidden shadow-2xl">
@@ -491,7 +552,7 @@
                     </button>
                 </div>
 
-                <form action="{{ route('trips.expenses.store', $trip) }}" method="POST" class="space-y-4">
+                <form x-data="{ expenseCategory: 'food' }" action="{{ route('trips.expenses.store', $trip) }}" method="POST" class="space-y-4">
                     @csrf
                     <div class="space-y-2">
                         <label class="text-xs font-black text-slate-400 uppercase tracking-widest">Title</label>
@@ -505,14 +566,24 @@
                         </div>
                         <div class="space-y-2">
                             <label class="text-xs font-black text-slate-400 uppercase tracking-widest">Category</label>
-                            <select name="category" class="w-full px-5 py-4 bg-slate-50 border-2 border-transparent rounded-xl focus:bg-white focus:border-[#FF52A7] outline-none transition-all appearance-none">
-                                <option value="food">Food & Dining</option>
-                                <option value="transport">Transportation</option>
-                                <option value="accommodation">Accommodation</option>
-                                <option value="activities">Activities</option>
-                                <option value="other">Other</option>
-                            </select>
+                            <div class="relative">
+                                <select name="category" x-model="expenseCategory" class="w-full px-5 py-4 bg-slate-50 border-2 border-transparent rounded-xl focus:bg-white focus:border-[#FF52A7] outline-none transition-all appearance-none pr-10">
+                                    <option value="food">Food & Dining</option>
+                                    <option value="transport">Transportation</option>
+                                    <option value="accommodation">Accommodation</option>
+                                    <option value="activities">Activities</option>
+                                    <option value="other">Other</option>
+                                </select>
+                                <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none text-slate-400">
+                                    <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+
+                    <div x-show="expenseCategory === 'other'" x-collapse class="space-y-2">
+                        <label class="text-xs font-black text-slate-400 uppercase tracking-widest">Custom Category</label>
+                        <input type="text" name="custom_category" placeholder="e.g. Souvenirs" class="w-full px-5 py-4 bg-slate-50 border-2 border-transparent rounded-xl focus:bg-white focus:border-[#FF52A7] outline-none transition-all">
                     </div>
 
                     <button type="submit" class="w-full py-4 bg-[#FFB800] text-[#071022] font-black rounded-2xl shadow-xl hover:bg-yellow-400 transition-all mt-4">
@@ -523,4 +594,45 @@
         </div>
     </div>
 </div>
+    {{-- Add Budget Modal --}}
+    <div x-show="showBudgetModal" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition ease-in duration-200"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+         x-cloak>
+        <div @click.away="showBudgetModal = false" 
+             class="bg-white rounded-[2.5rem] w-full max-w-md p-8 shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[#FFB800] to-[#FF52A7]"></div>
+            
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-[#071022]">Set Trip Budget</h3>
+                <button @click="showBudgetModal = false" class="text-slate-400 hover:text-slate-600 transition-colors">
+                    <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+
+            <form action="{{ route('trips.budget.update', $trip) }}" method="POST" class="space-y-6">
+                @csrf
+                @method('PUT')
+                
+                <div>
+                    <label for="budget" class="block text-xs font-bold text-slate-500 uppercase tracking-widest mb-2">Amount to Add (₹)</label>
+                    <div class="relative">
+                        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-bold">₹</span>
+                        <input type="number" step="0.01" name="budget" id="budget" required 
+                               class="w-full pl-8 pr-4 py-4 bg-slate-50 border border-slate-100 rounded-2xl focus:ring-2 focus:ring-[#FFB800]/30 focus:border-[#FFB800] outline-none text-slate-800 font-bold" 
+                               placeholder="0.00">
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full btn-primary py-4 rounded-2xl text-[#071022] font-black text-sm shadow-xl shadow-[#FFB800]/20 hover:-translate-y-1 transition-transform">
+                    Add to Budget
+                </button>
+            </form>
+        </div>
+    </div>
 @endsection

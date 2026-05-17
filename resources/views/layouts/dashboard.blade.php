@@ -8,6 +8,33 @@
     <style>
         [x-cloak] { display: none !important; }
     </style>
+    <script>
+        // Prevent sidebar layout shift by detecting state early
+        (function() {
+            const sidebarOpen = localStorage.getItem('sidebarOpen') !== null 
+                ? localStorage.getItem('sidebarOpen') === 'true' 
+                : window.innerWidth >= 1024;
+            if (sidebarOpen) {
+                document.documentElement.classList.add('sidebar-open');
+            } else {
+                document.documentElement.classList.add('sidebar-closed');
+            }
+        })();
+    </script>
+    <style>
+        /* Stabilize sidebar width before Alpine.js loads */
+        @media (min-width: 1024px) {
+            .sidebar-open aside { width: 16rem !important; }
+            .sidebar-closed aside { width: 5rem !important; }
+            
+            /* Hide text labels when closed to prevent pop-in */
+            .sidebar-closed aside span, 
+            .sidebar-closed aside p, 
+            .sidebar-closed aside a span { 
+                display: none; 
+            }
+        }
+    </style>
 </head>
 <body class="bg-[#F8F9FB] text-slate-800 font-sans antialiased" 
       x-data="{ 
@@ -15,7 +42,7 @@
               ? localStorage.getItem('sidebarOpen') === 'true' 
               : window.innerWidth >= 1024 
       }" 
-      x-init="$watch('sidebarOpen', value => localStorage.setItem('sidebarOpen', value))">
+      x-init="$watch('sidebarOpen', value => localStorage.setItem('sidebarOpen', value)); document.documentElement.classList.remove('sidebar-open', 'sidebar-closed')">
 
     <!-- Mobile sidebar backdrop -->
     <div x-show="sidebarOpen" x-transition.opacity class="fixed inset-0 z-20 bg-slate-900/50 lg:hidden backdrop-blur-sm" @click="sidebarOpen = false"></div>

@@ -15,6 +15,7 @@ class Trip extends Model
         'description',
         'status',
         'image_url',
+        'budget',
     ];
 
     /**

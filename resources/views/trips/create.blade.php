@@ -69,6 +69,18 @@
                     @error('end_date') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
                 </div>
 
+                {{-- Budget --}}
+                <div class="md:col-span-2 space-y-2">
+                    <label for="budget" class="text-sm font-bold text-slate-700">Budget <span class="text-xs text-slate-400">(Optional - You can update it later)</span></label>
+                    <div class="relative">
+                        <span class="absolute left-5 top-1/2 -translate-y-1/2 text-slate-400 font-bold">$</span>
+                        <input type="number" name="budget" id="budget" placeholder="0.00" step="0.01" min="0"
+                               class="w-full pl-9 pr-5 py-4 bg-slate-50 border-2 border-transparent rounded-2xl focus:bg-white focus:border-[#FF52A7] transition-all outline-none @error('budget') border-red-400 @enderror"
+                               value="{{ old('budget') }}">
+                    </div>
+                    @error('budget') <p class="text-red-500 text-xs mt-1">{{ $message }}</p> @enderror
+                </div>
+
                 {{-- Description --}}
                 <div class="md:col-span-2 space-y-2">
                     <label for="description" class="text-sm font-bold text-slate-700">Description (Optional)</label>

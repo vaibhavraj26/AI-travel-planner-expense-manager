@@ -57,6 +57,7 @@ Route::middleware('auth')->group(function () {
     
     // Trip Expenses
     Route::post('/trips/{trip}/expenses', [TripController::class, 'storeExpense'])->name('trips.expenses.store');
+    Route::put('/trips/{trip}/budget', [TripController::class, 'updateBudget'])->name('trips.budget.update');
     
     // Trip Members (Sharing)
     Route::post('/trips/{trip}/members', [TripController::class, 'addMember'])->name('trips.members.store');

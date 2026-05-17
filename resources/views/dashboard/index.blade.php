@@ -56,7 +56,7 @@
                 </div>
                 <div>
                     <h3 class="text-slate-500 text-sm font-semibold">Total Budget</h3>
-                    <p class="text-2xl font-bold text-[#071022]">$4,250</p>
+                    <p class="text-2xl font-bold text-[#071022]">₹4,250</p>
                 </div>
             </div>
             <p class="text-xs text-slate-500">Across all planned trips</p>

@@ -18,26 +18,28 @@
         </div>
     </div>
 
-    {{-- Search and Filter --}}
-    <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row gap-4 items-center">
-        <div class="relative flex-1 w-full">
-            <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-            <input type="text" placeholder="Search destinations or trip names..." class="w-full pl-11 pr-4 py-2.5 bg-slate-50 border-transparent rounded-xl text-sm focus:bg-white focus:ring-2 focus:ring-[#FF52A7] transition-all outline-none">
+    @if($trips->isNotEmpty())
+        {{-- Search and Filter --}}
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row gap-4 items-center">
+            <div class="relative flex-1 w-full">
+                <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                <input type="text" placeholder="Search destinations or trip names..." class="w-full pl-11 pr-4 py-2.5 bg-slate-50 border-transparent rounded-xl text-sm focus:bg-white focus:ring-2 focus:ring-[#FF52A7] transition-all outline-none">
+            </div>
+            <div class="flex items-center gap-2 w-full md:w-auto">
+                <select class="bg-slate-50 border-transparent rounded-xl text-sm py-2.5 px-4 focus:ring-2 focus:ring-[#FF52A7] transition-all outline-none text-slate-600">
+                    <option value="all">All Status</option>
+                    <option value="upcoming">Upcoming</option>
+                    <option value="active">Active</option>
+                    <option value="completed">Completed</option>
+                </select>
+                <select class="bg-slate-50 border-transparent rounded-xl text-sm py-2.5 px-4 focus:ring-2 focus:ring-[#FF52A7] transition-all outline-none text-slate-600">
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                    <option value="date">By Date</option>
+                </select>
+            </div>
         </div>
-        <div class="flex items-center gap-2 w-full md:w-auto">
-            <select class="bg-slate-50 border-transparent rounded-xl text-sm py-2.5 px-4 focus:ring-2 focus:ring-[#FF52A7] transition-all outline-none text-slate-600">
-                <option value="all">All Status</option>
-                <option value="upcoming">Upcoming</option>
-                <option value="active">Active</option>
-                <option value="completed">Completed</option>
-            </select>
-            <select class="bg-slate-50 border-transparent rounded-xl text-sm py-2.5 px-4 focus:ring-2 focus:ring-[#FF52A7] transition-all outline-none text-slate-600">
-                <option value="newest">Newest First</option>
-                <option value="oldest">Oldest First</option>
-                <option value="date">By Date</option>
-            </select>
-        </div>
-    </div>
+    @endif
 
     {{-- Trips Grid --}}
     @if($trips->isEmpty())

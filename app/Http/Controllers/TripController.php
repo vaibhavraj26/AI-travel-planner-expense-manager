@@ -38,6 +38,7 @@ class TripController extends Controller
             'description' => 'nullable|string',
             'status' => 'required|in:upcoming,active,completed,cancelled',
             'image_url' => 'nullable|url',
+            'budget' => 'nullable|numeric|min:0',
         ]);
 
         Auth::user()->trips()->create($validated);
@@ -51,14 +52,17 @@ class TripController extends Controller
     public function show(Trip $trip)
     {
         $this->authorizeTrip($trip);
-        $trip->load(['activities', 'sharedUsers']);
+        $trip->load(['activities', 'sharedUsers', 'expenses.user']);
         
         // Group activities by date
         $itinerary = $trip->activities->groupBy(function($activity) {
             return \Carbon\Carbon::parse($activity->date)->format('Y-m-d');
         });
 
-        return view('trips.show', compact('trip', 'itinerary'));
+        $totalSpent = $trip->expenses->where('type', 'expense')->sum('amount');
+        $remaining = ($trip->budget ?? 0) - $totalSpent;
+
+        return view('trips.show', compact('trip', 'itinerary', 'totalSpent', 'remaining'));
     }
 
     /**
@@ -85,6 +89,7 @@ class TripController extends Controller
             'description' => 'nullable|string',
             'status' => 'required|in:upcoming,active,completed,cancelled',
             'image_url' => 'nullable|url',
+            'budget' => 'nullable|numeric|min:0',
         ]);
 
         $trip->update($validated);
@@ -136,11 +141,46 @@ class TripController extends Controller
             'title' => 'required|string|max:255',
             'amount' => 'required|numeric|min:0',
             'category' => 'required|string|max:255',
+            'custom_category' => 'nullable|string|max:255',
         ]);
+
+        if ($validated['category'] === 'other' && !empty($validated['custom_category'])) {
+            $validated['category'] = $validated['custom_category'];
+        }
+        unset($validated['custom_category']);
+
+        $validated['user_id'] = Auth::id();
 
         $trip->expenses()->create($validated);
 
         return redirect()->route('trips.show', $trip)->with('success', 'Expense added successfully!');
+    }
+
+    /**
+     * Update the trip budget.
+     */
+    public function updateBudget(Request $request, Trip $trip)
+    {
+        $this->authorizeTrip($trip, 'editor');
+
+        $validated = $request->validate([
+            'budget' => 'required|numeric|min:0',
+        ]);
+
+        $amount = $validated['budget'];
+
+        $trip->expenses()->create([
+            'user_id' => Auth::id(),
+            'type' => 'budget',
+            'title' => $trip->budget ? 'Budget Added' : 'Initial Budget',
+            'amount' => $amount,
+            'category' => 'budget',
+        ]);
+
+        $newTotal = ($trip->budget ?? 0) + $amount;
+        $trip->update(['budget' => $newTotal]);
+
+        return redirect()->route('trips.show', $trip)->with('success', 'Budget updated successfully!');
     }
 
     /**
