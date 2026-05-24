@@ -40,7 +40,7 @@ class Trip extends Model
      */
     public function sharedUsers()
     {
-        return $this->belongsToMany(User::class)->withPivot('role', 'is_accepted')->withTimestamps();
+        return $this->belongsToMany(User::class)->withPivot('role', 'is_accepted', 'invited_by')->withTimestamps();
     }
 
     public function expenses()

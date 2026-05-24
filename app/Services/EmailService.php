@@ -1,0 +1,120 @@
+<?php
+
+namespace App\Services;
+
+use App\Mail\NotificationMail;
+use App\Models\Trip;
+use App\Models\TripInvitation;
+use App\Models\User;
+use Illuminate\Support\Facades\Mail;
+
+class EmailService
+{
+    public function sendWelcome(User $user): void
+    {
+        Mail::to($user->email)->send(new NotificationMail(
+            'Welcome back to ' . config('app.name'),
+            'Welcome back, ' . $user->name,
+            'You have successfully signed in. Your trips, budgets, and invitations are ready whenever you are.',
+            'Open Dashboard',
+            route('home')
+        ));
+    }
+
+    public function sendPasswordResetOtp(User $user, string $otp): void
+    {
+        Mail::to($user->email)->send(new NotificationMail(
+            'Your password reset code',
+            'Use this code to reset your password',
+            'Enter the 6-digit code below in the password reset form. It expires in 10 minutes and can be used once.',
+            null,
+            null,
+            $otp
+        ));
+    }
+
+    public function sendPlanUpgraded(User $user): void
+    {
+        Mail::to($user->email)->send(new NotificationMail(
+            'Your Explorer Plus upgrade is active',
+            'Explorer Plus is now active',
+            'Your plan upgrade went through successfully. You can now use the premium trip tools, AI planner, and collaboration features.',
+            'Go to Home',
+            route('home')
+        ));
+    }
+
+    public function sendTripInvitation(Trip $trip, string $email, ?User $inviter, string $role, bool $registered): void
+    {
+        $inviterName = $inviter?->name ?? 'A trip member';
+        $actionLabel = $registered ? 'Open Dashboard' : 'Register and Join';
+        $actionUrl = $registered ? route('home') : route('register', ['email' => $email]);
+
+        Mail::to($email)->send(new NotificationMail(
+            $inviterName . ' invited you to ' . $trip->title,
+            'You have a trip invitation',
+            $inviterName . ' invited you to join ' . $trip->title . ' in ' . $trip->destination . ' as a ' . strtoupper($role) . '. ' . ($registered ? 'Log in to accept the invitation from your dashboard.' : 'Create your account with the same email address to join automatically.'),
+            $actionLabel,
+            $actionUrl
+        ));
+    }
+
+    public function notifyTripMembersJoined(Trip $trip, User $joinedUser): void
+    {
+        $trip->loadMissing(['user', 'sharedUsers']);
+
+        $recipientEmails = collect([$trip->user?->email])
+            ->merge(
+                $trip->sharedUsers
+                    ->filter(fn ($member) => (bool) ($member->pivot->is_accepted ?? false))
+                    ->pluck('email')
+            )
+            ->filter()
+            ->map(fn ($email) => strtolower($email))
+            ->unique()
+            ->reject(fn ($email) => $email === strtolower($joinedUser->email));
+
+        foreach ($recipientEmails as $recipientEmail) {
+            Mail::to($recipientEmail)->send(new NotificationMail(
+                $joinedUser->name . ' joined ' . $trip->title,
+                'A member joined the trip',
+                $joinedUser->name . ' has accepted the trip invitation and joined ' . $trip->title . '. Everyone can now collaborate together.',
+                'View Trip',
+                route('trips.show', $trip)
+            ));
+        }
+    }
+
+    public function claimGuestInvitations(User $user): void
+    {
+        $invitations = TripInvitation::with(['trip.user', 'trip.sharedUsers'])
+            ->whereRaw('LOWER(email) = ?', [strtolower($user->email)])
+            ->get();
+
+        foreach ($invitations as $invitation) {
+            $trip = $invitation->trip;
+
+            if (!$trip) {
+                $invitation->delete();
+                continue;
+            }
+
+            $trip->sharedUsers()->syncWithoutDetaching([
+                $user->id => [
+                    'role' => $invitation->role,
+                    'is_accepted' => true,
+                    'invited_by' => $invitation->invited_by,
+                ],
+            ]);
+
+            $trip->sharedUsers()->updateExistingPivot($user->id, [
+                'role' => $invitation->role,
+                'is_accepted' => true,
+                'invited_by' => $invitation->invited_by,
+            ]);
+
+            $invitation->delete();
+            $this->notifyTripMembersJoined($trip, $user);
+        }
+    }
+}

@@ -28,6 +28,9 @@ Route::middleware('guest')->group(function () {
 
     Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
     Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+    Route::post('/forgot-password/otp', [AuthController::class, 'requestPasswordResetOtp'])->name('password.otp.request');
+    Route::post('/forgot-password/otp/verify', [AuthController::class, 'verifyPasswordResetOtp'])->name('password.otp.verify');
+    Route::post('/forgot-password/reset', [AuthController::class, 'resetPasswordWithOtp'])->name('password.otp.reset');
 });
 
 Route::middleware('auth')->group(function () {
@@ -72,6 +75,9 @@ Route::middleware('auth')->group(function () {
     Route::put('/trips/{trip}/budget', [TripController::class, 'updateBudget'])->name('trips.budget.update');
     
     // Trip Members (Sharing)
+    Route::get('/trips/{trip}/members', function (\App\Models\Trip $trip) {
+        return redirect()->route('trips.show', $trip);
+    });
     Route::post('/trips/{trip}/members', [TripController::class, 'addMember'])->name('trips.members.store');
     Route::delete('/trips/{trip}/members/{user}', [TripController::class, 'removeMember'])->name('trips.members.destroy');
     Route::post('/trips/{trip}/members/accept', [TripController::class, 'acceptInvitation'])->name('trips.members.accept');

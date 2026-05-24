@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TripInvitation;
+use App\Services\EmailService;
 use Illuminate\Http\Request;
 use App\Models\Trip;
 use Illuminate\Support\Facades\Auth;
@@ -9,6 +11,10 @@ use Illuminate\Http\Client\ConnectionException;
 
 class TripController extends Controller
 {
+    public function __construct(private EmailService $emailService)
+    {
+    }
+
     /**
      * Display a listing of the trips.
      */
@@ -575,6 +581,8 @@ class TripController extends Controller
                 'invited_by' => Auth::id(),
             ]);
 
+            $this->emailService->sendTripInvitation($trip, $user->email, Auth::user(), $request->role, true);
+
             return redirect()->route('trips.show', $trip)->with('success', 'Invitation sent to ' . $user->name . '! They can accept and join from their dashboard.');
         }
 
@@ -591,7 +599,66 @@ class TripController extends Controller
             'invited_by' => Auth::id(),
         ]);
 
+        $this->emailService->sendTripInvitation($trip, $email, Auth::user(), $request->role, false);
+
         return redirect()->route('trips.show', $trip)->with('success', 'Invitation sent to ' . $email . '! They can join once they register.');
+    }
+
+    /**
+     * Accept a pending trip invitation.
+     */
+    public function acceptInvitation(Trip $trip)
+    {
+        $membership = $trip->sharedUsers()->where('user_id', Auth::id())->first();
+
+        if (!$membership) {
+            abort(403, 'You do not have a pending invitation for this trip.');
+        }
+
+        if ($membership->pivot->is_accepted) {
+            return redirect()->route('trips.show', $trip)->with('info', 'You have already joined this trip.');
+        }
+
+        $trip->sharedUsers()->updateExistingPivot(Auth::id(), [
+            'is_accepted' => true,
+        ]);
+
+        $trip->load(['user', 'sharedUsers']);
+        $this->emailService->notifyTripMembersJoined($trip, Auth::user());
+
+        return redirect()->route('trips.show', $trip)->with('success', 'You have joined the trip successfully!');
+    }
+
+    /**
+     * Decline a pending trip invitation.
+     */
+    public function declineInvitation(Trip $trip)
+    {
+        $membership = $trip->sharedUsers()->where('user_id', Auth::id())->first();
+
+        if (!$membership) {
+            abort(403, 'You do not have a pending invitation for this trip.');
+        }
+
+        $trip->sharedUsers()->detach(Auth::id());
+
+        return redirect()->route('trips.index')->with('success', 'Invitation declined successfully.');
+    }
+
+    /**
+     * Cancel a guest invitation.
+     */
+    public function cancelInvitation(Trip $trip, TripInvitation $invitation)
+    {
+        $this->authorizeTrip($trip, 'owner');
+
+        if ($invitation->trip_id !== $trip->id) {
+            abort(404, 'Invitation not found for this trip.');
+        }
+
+        $invitation->delete();
+
+        return redirect()->route('trips.show', $trip)->with('success', 'Invitation canceled successfully.');
     }
 
     /**

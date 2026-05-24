@@ -3,13 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Services\EmailService;
+use App\Models\TripInvitation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
 
 class AuthController extends Controller
 {
+    public function __construct(private EmailService $emailService)
+    {
+    }
+
     /**
      * Handle an incoming registration request.
      */
@@ -34,6 +40,8 @@ class AuthController extends Controller
 
         // Login the user after registration and remember them for 30 days
         Auth::login($user, true);
+        $this->emailService->sendWelcome($user);
+        $this->emailService->claimGuestInvitations($user);
 
         if (!$plan) {
             $request->session()->flash('onboarding', true);
@@ -55,6 +63,7 @@ class AuthController extends Controller
         // The second parameter "true" tells Laravel to remember the user
         if (Auth::attempt($credentials, true)) {
             $request->session()->regenerate();
+            $this->emailService->sendWelcome(Auth::user());
 
             return redirect()->intended(route('home'));
         }
@@ -105,8 +114,105 @@ class AuthController extends Controller
 
         $user->plan = 'plus';
         $user->save();
+        $this->emailService->sendPlanUpgraded($user);
 
         return redirect()->route('home')->with('success', 'Welcome to Explorer Plus! Your upgrade is now active.');
+    }
+
+    /**
+     * Send a password reset OTP to the provided email address.
+     */
+    public function requestPasswordResetOtp(Request $request)
+    {
+        $validated = $request->validate([
+            'email' => ['required', 'email', 'exists:users,email'],
+        ]);
+
+        $user = User::where('email', $validated['email'])->firstOrFail();
+        $otp = (string) random_int(100000, 999999);
+
+        DB::table('password_reset_otps')->updateOrInsert(
+            ['email' => $user->email],
+            [
+                'otp' => $otp,
+                'expires_at' => now()->addMinutes(10),
+                'verified_at' => null,
+                'attempts' => 0,
+                'updated_at' => now(),
+                'created_at' => now(),
+            ]
+        );
+
+        $this->emailService->sendPasswordResetOtp($user, $otp);
+
+        return back()->with('success', 'A 6-digit OTP has been sent to your email address.');
+    }
+
+    /**
+     * Verify a password reset OTP.
+     */
+    public function verifyPasswordResetOtp(Request $request)
+    {
+        $validated = $request->validate([
+            'email' => ['required', 'email'],
+            'otp' => ['required', 'digits:6'],
+        ]);
+
+        $record = DB::table('password_reset_otps')->where('email', $validated['email'])->first();
+
+        if (!$record) {
+            return back()->withErrors(['otp' => 'No OTP request was found for this email address.']);
+        }
+
+        if (now()->greaterThan($record->expires_at)) {
+            return back()->withErrors(['otp' => 'This OTP has expired. Please request a new one.']);
+        }
+
+        if ((int) $record->attempts >= 5) {
+            return back()->withErrors(['otp' => 'Too many failed attempts. Please request a new OTP.']);
+        }
+
+        if ($record->otp !== $validated['otp']) {
+            DB::table('password_reset_otps')->where('email', $validated['email'])->update([
+                'attempts' => $record->attempts + 1,
+                'updated_at' => now(),
+            ]);
+
+            return back()->withErrors(['otp' => 'The OTP you entered is invalid.']);
+        }
+
+        DB::table('password_reset_otps')->where('email', $validated['email'])->update([
+            'verified_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return back()->with('success', 'OTP verified. You can now reset your password.');
+    }
+
+    /**
+     * Reset the password after OTP verification.
+     */
+    public function resetPasswordWithOtp(Request $request)
+    {
+        $validated = $request->validate([
+            'email' => ['required', 'email'],
+            'otp' => ['required', 'digits:6'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $record = DB::table('password_reset_otps')->where('email', $validated['email'])->first();
+
+        if (!$record || now()->greaterThan($record->expires_at) || $record->otp !== $validated['otp'] || !$record->verified_at) {
+            return back()->withErrors(['otp' => 'The OTP is invalid or expired. Please verify again.']);
+        }
+
+        $user = User::where('email', $validated['email'])->firstOrFail();
+        $user->password = Hash::make($validated['password']);
+        $user->save();
+
+        DB::table('password_reset_otps')->where('email', $validated['email'])->delete();
+
+        return back()->with('success', 'Your password has been reset successfully.');
     }
 
     /**
