@@ -3,7 +3,7 @@ WORKDIR /app
 COPY composer.json composer.lock ./
 RUN composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader --no-progress
 
-FROM node:18 AS node_builder
+FROM node:20 AS node_builder
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci --silent
