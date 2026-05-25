@@ -11,7 +11,7 @@ COPY . /app
 RUN npm run build
 
 FROM php:8.2-fpm-alpine
-RUN apk add --no-cache nginx supervisor bash curl libzip-dev oniguruma-dev zlib-dev icu-dev libpng-dev libjpeg-turbo-dev freetype-dev \
+RUN apk add --no-cache nginx supervisor bash curl linux-headers libzip-dev oniguruma-dev zlib-dev icu-dev libpng-dev libjpeg-turbo-dev freetype-dev \
     && docker-php-ext-configure zip && docker-php-ext-install pdo_mysql zip bcmath pcntl sockets exif intl && \
     docker-php-ext-configure gd --with-jpeg --with-freetype && docker-php-ext-install gd
 
