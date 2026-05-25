@@ -31,6 +31,7 @@ RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
 
 # Nginx and supervisor configs
 COPY docker/default.conf.template /etc/nginx/conf.d/default.conf.template
+COPY docker/nginx.conf /etc/nginx/nginx.conf
 COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
