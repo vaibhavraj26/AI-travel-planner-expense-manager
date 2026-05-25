@@ -2,46 +2,48 @@
 
 namespace App\Services;
 
-use App\Mail\NotificationMail;
 use App\Models\Trip;
 use App\Models\TripInvitation;
 use App\Models\User;
-use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Http;
 
 class EmailService
 {
     public function sendWelcome(User $user): void
     {
-        Mail::to($user->email)->send(new NotificationMail(
+        $this->sendNotification(
+            $user->email,
             'Welcome back to ' . config('app.name'),
             'Welcome back, ' . $user->name,
             'You have successfully signed in. Your trips, budgets, and invitations are ready whenever you are.',
             'Open Dashboard',
             route('home')
-        ));
+        );
     }
 
     public function sendPasswordResetOtp(User $user, string $otp): void
     {
-        Mail::to($user->email)->send(new NotificationMail(
+        $this->sendNotification(
+            $user->email,
             'Your password reset code',
             'Use this code to reset your password',
             'Enter the 6-digit code below in the password reset form. It expires in 10 minutes and can be used once.',
             null,
             null,
             $otp
-        ));
+        );
     }
 
     public function sendPlanUpgraded(User $user): void
     {
-        Mail::to($user->email)->send(new NotificationMail(
+        $this->sendNotification(
+            $user->email,
             'Your Explorer Plus upgrade is active',
             'Explorer Plus is now active',
             'Your plan upgrade went through successfully. You can now use the premium trip tools, AI planner, and collaboration features.',
             'Go to Home',
             route('home')
-        ));
+        );
     }
 
     public function sendTripInvitation(Trip $trip, string $email, ?User $inviter, string $role, bool $registered): void
@@ -50,13 +52,14 @@ class EmailService
         $actionLabel = $registered ? 'Open Dashboard' : 'Register and Join';
         $actionUrl = $registered ? route('home') : route('register', ['email' => $email]);
 
-        Mail::to($email)->send(new NotificationMail(
+        $this->sendNotification(
+            $email,
             $inviterName . ' invited you to ' . $trip->title,
             'You have a trip invitation',
             $inviterName . ' invited you to join ' . $trip->title . ' in ' . $trip->destination . ' as a ' . strtoupper($role) . '. ' . ($registered ? 'Log in to accept the invitation from your dashboard.' : 'Create your account with the same email address to join automatically.'),
             $actionLabel,
             $actionUrl
-        ));
+        );
     }
 
     public function notifyTripMembersJoined(Trip $trip, User $joinedUser): void
@@ -75,13 +78,14 @@ class EmailService
             ->reject(fn ($email) => $email === strtolower($joinedUser->email));
 
         foreach ($recipientEmails as $recipientEmail) {
-            Mail::to($recipientEmail)->send(new NotificationMail(
+            $this->sendNotification(
+                $recipientEmail,
                 $joinedUser->name . ' joined ' . $trip->title,
                 'A member joined the trip',
                 $joinedUser->name . ' has accepted the trip invitation and joined ' . $trip->title . '. Everyone can now collaborate together.',
                 'View Trip',
                 route('trips.show', $trip)
-            ));
+            );
         }
     }
 
@@ -115,6 +119,67 @@ class EmailService
 
             $invitation->delete();
             $this->notifyTripMembersJoined($trip, $user);
+        }
+    }
+
+    private function sendNotification(
+        string $email,
+        string $subject,
+        string $heading,
+        string $body,
+        ?string $actionLabel = null,
+        ?string $actionUrl = null,
+        ?string $code = null,
+    ): void {
+        $apiKey = config('services.brevo.key');
+        $senderEmail = config('services.brevo.sender_email');
+        $senderName = config('services.brevo.sender_name', config('app.name'));
+
+        if (!is_string($apiKey) || $apiKey === '') {
+            throw new \RuntimeException('BREVO_API_KEY is not configured.');
+        }
+
+        if (!is_string($senderEmail) || $senderEmail === '') {
+            throw new \RuntimeException('BREVO_SENDER_EMAIL is not configured.');
+        }
+
+        $html = view('emails.notification', [
+            'subjectLine' => $subject,
+            'heading' => $heading,
+            'body' => $body,
+            'actionLabel' => $actionLabel,
+            'actionUrl' => $actionUrl,
+            'code' => $code,
+        ])->render();
+
+        $text = $heading . "\n\n" . $body;
+
+        if ($code) {
+            $text .= "\n\nOTP Code: " . $code;
+        }
+
+        if ($actionLabel && $actionUrl) {
+            $text .= "\n\n" . $actionLabel . ': ' . $actionUrl;
+        }
+
+        $response = Http::withHeaders([
+            'accept' => 'application/json',
+            'api-key' => $apiKey,
+        ])->post('https://api.brevo.com/v3/smtp/email', [
+            'sender' => [
+                'email' => $senderEmail,
+                'name' => $senderName,
+            ],
+            'to' => [
+                ['email' => $email],
+            ],
+            'subject' => $subject,
+            'htmlContent' => $html,
+            'textContent' => $text,
+        ]);
+
+        if ($response->failed()) {
+            throw new \RuntimeException('Brevo API error: ' . $response->status() . ' ' . $response->body());
         }
     }
 }
