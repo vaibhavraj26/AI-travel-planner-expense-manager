@@ -13,12 +13,16 @@ Route::get('/', function () {
     if (Auth::check()) {
         return redirect()->route('home');
     }
-    return view('landing');
+    return view('landing.index');
 })->name('landing');
 
 Route::get('/pricing', function () {
     return view('pricing');
 })->name('pricing');
+
+Route::get('/blog', function () {
+    return view('blog.index');
+})->name('blog');
 
 Route::middleware('guest')->group(function () {
     Route::get('/register', function () {
