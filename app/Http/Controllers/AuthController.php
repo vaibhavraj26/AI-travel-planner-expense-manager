@@ -145,7 +145,13 @@ class AuthController extends Controller
 
         $this->emailService->sendPasswordResetOtp($user, $otp);
 
-        return back()->with('success', 'A 6-digit OTP has been sent to your email address.');
+        $message = 'A 6-digit OTP has been sent to your email address.';
+
+        if ($request->expectsJson()) {
+            return response()->json(['message' => $message]);
+        }
+
+        return back()->with('success', $message);
     }
 
     /**
@@ -161,14 +167,26 @@ class AuthController extends Controller
         $record = DB::table('password_reset_otps')->where('email', $validated['email'])->first();
 
         if (!$record) {
+            if ($request->expectsJson()) {
+                return response()->json(['message' => 'No OTP request was found for this email address.'], 422);
+            }
+
             return back()->withErrors(['otp' => 'No OTP request was found for this email address.']);
         }
 
         if (now()->greaterThan($record->expires_at)) {
+            if ($request->expectsJson()) {
+                return response()->json(['message' => 'This OTP has expired. Please request a new one.'], 422);
+            }
+
             return back()->withErrors(['otp' => 'This OTP has expired. Please request a new one.']);
         }
 
         if ((int) $record->attempts >= 5) {
+            if ($request->expectsJson()) {
+                return response()->json(['message' => 'Too many failed attempts. Please request a new OTP.'], 422);
+            }
+
             return back()->withErrors(['otp' => 'Too many failed attempts. Please request a new OTP.']);
         }
 
@@ -178,6 +196,10 @@ class AuthController extends Controller
                 'updated_at' => now(),
             ]);
 
+            if ($request->expectsJson()) {
+                return response()->json(['message' => 'The OTP you entered is invalid.'], 422);
+            }
+
             return back()->withErrors(['otp' => 'The OTP you entered is invalid.']);
         }
 
@@ -185,6 +207,10 @@ class AuthController extends Controller
             'verified_at' => now(),
             'updated_at' => now(),
         ]);
+
+        if ($request->expectsJson()) {
+            return response()->json(['message' => 'OTP verified. You can now reset your password.']);
+        }
 
         return back()->with('success', 'OTP verified. You can now reset your password.');
     }
