@@ -14,6 +14,7 @@
 <body>
 
     @yield('content')
+    
     @if(!request()->routeIs('login') && !request()->routeIs('register'))
         <x-footer /> 
     @endif

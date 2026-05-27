@@ -10,7 +10,7 @@
         [x-cloak] { display: none !important; }
     </style>
 </head>
-<body class="bg-[#FFF8F3] text-[#071022]">
+<body class="bg-[#FFF8F3] text-page-text">
     <div class="min-h-screen flex flex-col overflow-x-hidden font-['Sora',sans-serif]">
 
         <x-blog-topbar />
