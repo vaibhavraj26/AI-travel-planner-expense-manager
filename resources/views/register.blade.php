@@ -12,16 +12,16 @@
         <!-- Left Side: Branding / Visual (Hidden on mobile) -->
         <div class="hidden lg:flex w-1/2 flex-col justify-between p-6 lg:p-8 relative">
             <!-- Glassy background container -->
-            <div class="absolute inset-4 lg:inset-6 rounded-[2rem] bg-gradient-to-br from-[#071022] to-[#1A2540] overflow-hidden shadow-2xl shadow-indigo-900/20">
+            <div class="absolute inset-4 lg:inset-6 rounded-[2rem] bg-gradient-to-br from-page-text to-[#1A2540] overflow-hidden shadow-2xl shadow-indigo-900/20">
                 <!-- Abstract Map/Travel graphic background -->
                 <div class="absolute inset-0 opacity-50 bg-[url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center"></div>
-                <div class="absolute inset-0 bg-gradient-to-t from-[#071022] via-[#071022]/80 to-[#071022]/20"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-page-text via-page-text/80 to-page-text/20"></div>
                 
                 <!-- Content --> 
                 <div class="absolute inset-0 flex flex-col justify-between p-8 lg:p-10">
                     <a href="{{ route('landing') }}" class="flex items-center gap-2 group w-max">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 h-8 text-[#FF52A7] group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" stroke-width="1.5">
-                          <path d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7z" fill="#FF52A7" stroke="none"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 h-8 text-party-1 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" stroke-width="1.5">
+                          <path d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7z" fill="party-1" stroke="none"/>
                           <circle cx="12" cy="9" r="2.5" fill="#FFF" />
                         </svg>
                         <span class="font-bold text-xl tracking-tight text-white">triptogether</span>
@@ -36,10 +36,10 @@
                         </h1>
                         <div class="flex items-center gap-3">
                             <div class="flex -space-x-3">
-                                <img class="w-8 h-8 lg:w-10 lg:h-10 rounded-full border-2 border-[#071022]" src="https://i.pravatar.cc/100?img=1" alt="User">
-                                <img class="w-8 h-8 lg:w-10 lg:h-10 rounded-full border-2 border-[#071022]" src="https://i.pravatar.cc/100?img=2" alt="User">
-                                <img class="w-8 h-8 lg:w-10 lg:h-10 rounded-full border-2 border-[#071022]" src="https://i.pravatar.cc/100?img=3" alt="User">
-                                <div class="w-8 h-8 lg:w-10 lg:h-10 rounded-full border-2 border-[#071022] bg-[#334155] flex items-center justify-center text-[10px] lg:text-xs text-white font-medium">+2k</div>
+                                <img class="w-8 h-8 lg:w-10 lg:h-10 rounded-full border-2 border-page-text" src="https://i.pravatar.cc/100?img=1" alt="User">
+                                <img class="w-8 h-8 lg:w-10 lg:h-10 rounded-full border-2 border-page-text" src="https://i.pravatar.cc/100?img=2" alt="User">
+                                <img class="w-8 h-8 lg:w-10 lg:h-10 rounded-full border-2 border-page-text" src="https://i.pravatar.cc/100?img=3" alt="User">
+                                <div class="w-8 h-8 lg:w-10 lg:h-10 rounded-full border-2 border-page-text bg-[#334155] flex items-center justify-center text-[10px] lg:text-xs text-white font-medium">+2k</div>
                             </div>
                             <p class="text-slate-300 text-xs lg:text-sm">Join a community of modern explorers.</p>
                         </div>
@@ -55,25 +55,25 @@
                 <!-- Mobile Logo -->
                 <div class="lg:hidden flex items-center justify-center gap-2 mb-6">
                     <a href="{{ route('landing') }}" class="flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-10 h-10 text-[#FF52A7]" fill="none" stroke="currentColor" stroke-width="1.5">
-                          <path d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7z" fill="#FF52A7" stroke="none"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-10 h-10 text-party-1" fill="none" stroke="currentColor" stroke-width="1.5">
+                          <path d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7z" fill="party-1" stroke="none"/>
                           <circle cx="12" cy="9" r="2.5" fill="#FFF" />
                         </svg>
-                        <span class="font-bold text-3xl tracking-tight text-[#071022]">triptogether</span>
+                        <span class="font-bold text-3xl tracking-tight text-page-text">triptogether</span>
                     </a>
                 </div>
 
-                <div class="bg-white/60 backdrop-blur-xl border border-white/60 rounded-[2rem] p-6 sm:p-8 shadow-2xl shadow-[#7C3AED]/10 relative overflow-hidden">
+                <div class="bg-white/60 backdrop-blur-xl border border-white/60 rounded-[2rem] p-6 sm:p-8 shadow-2xl shadow-accent/10 relative overflow-hidden">
                     
                     <!-- Form Header & Toggle -->
                     <div class="mb-6 relative z-10">
                         <div class="bg-slate-200/50 p-1.5 rounded-2xl flex relative mb-6 backdrop-blur-sm">
                             <div id="toggle-slider" class="absolute top-1.5 bottom-1.5 left-1.5 w-[calc(50%-0.375rem)] bg-white rounded-xl shadow-sm transition-transform duration-300 ease-out {{ $isRegister ? 'translate-x-full' : '' }}"></div>
-                            <button onclick="switchTab('login')" id="btn-login" class="flex-1 py-2.5 text-sm font-semibold z-10 transition-colors duration-300 {{ $isRegister ? 'text-slate-500 hover:text-slate-700' : 'text-[#071022]' }}">Sign In</button>
-                            <button onclick="switchTab('register')" id="btn-register" class="flex-1 py-2.5 text-sm font-semibold z-10 transition-colors duration-300 {{ $isRegister ? 'text-[#071022]' : 'text-slate-500 hover:text-slate-700' }}">Create Account</button>
+                            <button onclick="switchTab('login')" id="btn-login" class="flex-1 py-2.5 text-sm font-semibold z-10 transition-colors duration-300 {{ $isRegister ? 'text-slate-500 hover:text-slate-700' : 'text-page-text' }}">Sign In</button>
+                            <button onclick="switchTab('register')" id="btn-register" class="flex-1 py-2.5 text-sm font-semibold z-10 transition-colors duration-300 {{ $isRegister ? 'text-page-text' : 'text-slate-500 hover:text-slate-700' }}">Create Account</button>
                         </div>
                         
-                        <h2 id="form-title" class="font-['Playfair_Display',serif] text-3xl font-bold text-[#071022] mb-2 transition-all duration-300">
+                        <h2 id="form-title" class="font-['Playfair_Display',serif] text-3xl font-bold text-page-text mb-2 transition-all duration-300">
                             {{ $isRegister ? 'Create an account' : 'Welcome back' }}
                         </h2>
                         <p id="form-subtitle" class="text-slate-500 text-sm transition-all duration-300">
@@ -97,27 +97,27 @@
                                         <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                             <svg class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" /></svg>
                                         </div>
-                                        <input type="email" name="email" value="{{ old('email') }}" class="w-full pl-11 pr-4 py-2.5 bg-white/70 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#FF52A7]/30 focus:border-[#FF52A7] transition-all outline-none text-slate-800 placeholder-slate-400" placeholder="you@example.com" required>
+                                        <input type="email" name="email" value="{{ old('email') }}" class="w-full pl-11 pr-4 py-2.5 bg-white/70 border border-slate-200 rounded-xl focus:ring-2 focus:ring-party-1/30 focus:border-party-1 transition-all outline-none text-slate-800 placeholder-slate-400" placeholder="you@example.com" required>
                                     </div>
                                     @error('email') <span class="text-xs text-red-500 mt-1 block">{!! $message !!}</span> @enderror
                                 </div>
                                 <div>
                                     <div class="flex items-center justify-between mb-1">
                                         <label class="block text-sm font-semibold text-slate-700">Password</label>
-                                        <a href="#" onclick="switchTab('forgot'); return false;" class="text-xs font-semibold text-[#7C3AED] hover:text-[#5B21B6] transition-colors">Forgot password?</a>
+                                        <a href="#" onclick="switchTab('forgot'); return false;" class="text-xs font-semibold text-accent hover:text-[#5B21B6] transition-colors">Forgot password?</a>
                                     </div>
                                     <div class="relative">
                                         <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                             <svg class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
                                         </div>
-                                        <input type="password" name="password" class="w-full pl-11 pr-4 py-2.5 bg-white/70 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#FF52A7]/30 focus:border-[#FF52A7] transition-all outline-none text-slate-800 placeholder-slate-400" placeholder="••••••••" required>
+                                        <input type="password" name="password" class="w-full pl-11 pr-4 py-2.5 bg-white/70 border border-slate-200 rounded-xl focus:ring-2 focus:ring-party-1/30 focus:border-party-1 transition-all outline-none text-slate-800 placeholder-slate-400" placeholder="••••••••" required>
                                     </div>
                                     @error('password') <span class="text-xs text-red-500 mt-1 block">{{ $message }}</span> @enderror
                                     @if ($errors->has('login'))
                                         <span class="text-xs text-red-500 mt-1 block">{{ $errors->first('login') }}</span>
                                     @endif
                                 </div>
-                                <button type="submit" class="w-full btn-primary py-3 rounded-xl text-[#071022] font-bold text-sm shadow-lg shadow-[#FF52A7]/20 hover:-translate-y-0.5 transition-transform mt-4">
+                                <button type="submit" class="w-full btn-primary py-3 rounded-xl text-page-text font-bold text-sm shadow-lg shadow-party-1/20 hover:-translate-y-0.5 transition-transform mt-4">
                                     Sign In to Dashboard
                                 </button>
                             </div>
@@ -136,7 +136,7 @@
                                         <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                             <svg class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
                                         </div>
-                                        <input type="text" name="name" value="{{ old('name') }}" class="w-full pl-11 pr-4 py-2.5 bg-white/70 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#FF52A7]/30 focus:border-[#FF52A7] transition-all outline-none text-slate-800 placeholder-slate-400" placeholder="John Doe" required>
+                                        <input type="text" name="name" value="{{ old('name') }}" class="w-full pl-11 pr-4 py-2.5 bg-white/70 border border-slate-200 rounded-xl focus:ring-2 focus:ring-party-1/30 focus:border-party-1 transition-all outline-none text-slate-800 placeholder-slate-400" placeholder="John Doe" required>
                                     </div>
                                     @error('name') <span class="text-xs text-red-500 mt-1 block">{{ $message }}</span> @enderror
                                 </div>
@@ -146,7 +146,7 @@
                                         <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                             <svg class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" /></svg>
                                         </div>
-                                        <input type="email" name="email" value="{{ old('email') }}" class="w-full pl-11 pr-4 py-2.5 bg-white/70 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#FF52A7]/30 focus:border-[#FF52A7] transition-all outline-none text-slate-800 placeholder-slate-400" placeholder="you@example.com" required>
+                                        <input type="email" name="email" value="{{ old('email') }}" class="w-full pl-11 pr-4 py-2.5 bg-white/70 border border-slate-200 rounded-xl focus:ring-2 focus:ring-party-1/30 focus:border-party-1 transition-all outline-none text-slate-800 placeholder-slate-400" placeholder="you@example.com" required>
                                     </div>
                                     @error('email') <span class="text-xs text-red-500 mt-1 block">{!! $message !!}</span> @enderror
                                 </div>
@@ -156,11 +156,11 @@
                                         <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                             <svg class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
                                         </div>
-                                        <input type="password" name="password" class="w-full pl-11 pr-4 py-2.5 bg-white/70 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#FF52A7]/30 focus:border-[#FF52A7] transition-all outline-none text-slate-800 placeholder-slate-400" placeholder="••••••••" required>
+                                        <input type="password" name="password" class="w-full pl-11 pr-4 py-2.5 bg-white/70 border border-slate-200 rounded-xl focus:ring-2 focus:ring-party-1/30 focus:border-party-1 transition-all outline-none text-slate-800 placeholder-slate-400" placeholder="••••••••" required>
                                     </div>
                                     @error('password') <span class="text-xs text-red-500 mt-1 block">{{ $message }}</span> @enderror
                                 </div>
-                                <button type="submit" class="w-full btn-primary py-3 rounded-xl text-[#071022] font-bold text-sm shadow-lg shadow-[#FF52A7]/20 hover:-translate-y-0.5 transition-transform mt-4">
+                                <button type="submit" class="w-full btn-primary py-3 rounded-xl text-page-text font-bold text-sm shadow-lg shadow-party-1/20 hover:-translate-y-0.5 transition-transform mt-4">
                                     Create Account
                                 </button>
                             </div>
@@ -176,14 +176,14 @@
                                         <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                             <svg class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207" /></svg>
                                         </div>
-                                        <input type="email" id="forgot-email" name="email" class="w-full pl-11 pr-24 py-2.5 bg-white/70 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#FF52A7]/30 focus:border-[#FF52A7] transition-all outline-none text-slate-800 placeholder-slate-400" placeholder="you@example.com" required>
+                                        <input type="email" id="forgot-email" name="email" class="w-full pl-11 pr-24 py-2.5 bg-white/70 border border-slate-200 rounded-xl focus:ring-2 focus:ring-party-1/30 focus:border-party-1 transition-all outline-none text-slate-800 placeholder-slate-400" placeholder="you@example.com" required>
                                         <div class="absolute inset-y-1 right-1">
                                             <button type="button" id="btn-send-otp" class="h-full px-3 bg-slate-800 hover:bg-slate-900 disabled:bg-slate-300 disabled:cursor-not-allowed text-white text-xs font-bold rounded-lg transition-colors">
                                                 Send OTP
                                             </button>
                                         </div>
                                     </div>
-                                    <div id="otp-message" class="text-xs font-semibold text-slate-500 mt-1 hidden"></div>
+                                    <div id="otp-email-message" class="text-xs font-semibold text-red-500 mt-1 hidden"></div>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-semibold text-slate-700 mb-1">Verification OTP</label>
@@ -191,8 +191,9 @@
                                         <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                             <svg class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
                                         </div>
-                                        <input type="text" id="otp-input" name="otp" maxlength="6" pattern="\d{6}" class="w-full pl-11 pr-4 py-2.5 bg-white/70 border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#FF52A7]/30 focus:border-[#FF52A7] transition-all outline-none text-slate-800 placeholder-slate-400 tracking-widest font-mono text-center text-lg" placeholder="• • • • • •" required>
+                                        <input type="text" id="otp-input" name="otp" maxlength="6" pattern="\d{6}" class="w-full pl-11 pr-4 py-2.5 bg-white/70 border border-slate-200 rounded-xl focus:ring-2 focus:ring-party-1/30 focus:border-party-1 transition-all outline-none text-slate-800 placeholder-slate-400 tracking-widest font-mono text-center text-lg" placeholder="• • • • • •" required>
                                     </div>
+                                    <div id="otp-verify-message" class="text-xs font-semibold text-red-500 mt-1 hidden"></div>
                                 </div>
                                 <button type="button" id="btn-verify" disabled class="w-full py-3 rounded-xl font-bold text-sm transition-all mt-4 bg-slate-200 text-slate-400 cursor-not-allowed">
                                     Verify OTP
@@ -226,7 +227,7 @@
                 <div class="mt-6 text-center">
                     <p class="text-[11px] text-slate-500 leading-relaxed">
                         By continuing, you agree to TripTogether's <br>
-                        <a href="#" class="text-[#7C3AED] font-semibold hover:underline">Terms of Service</a> and <a href="#" class="text-[#7C3AED] font-semibold hover:underline">Privacy Policy</a>.
+                        <a href="#" class="text-accent font-semibold hover:underline">Terms of Service</a> and <a href="#" class="text-accent font-semibold hover:underline">Privacy Policy</a>.
                     </p>
                 </div>
             </div>
@@ -253,8 +254,8 @@
         }
 
         // Update button text colors
-        document.getElementById('btn-login').className = `flex-1 py-2.5 text-sm font-semibold z-10 transition-colors duration-300 ${(isLogin || isForgot) ? 'text-[#071022]' : 'text-slate-500 hover:text-slate-700'}`;
-        document.getElementById('btn-register').className = `flex-1 py-2.5 text-sm font-semibold z-10 transition-colors duration-300 ${(isLogin || isForgot) ? 'text-slate-500 hover:text-slate-700' : 'text-[#071022]'}`;
+        document.getElementById('btn-login').className = `flex-1 py-2.5 text-sm font-semibold z-10 transition-colors duration-300 ${(isLogin || isForgot) ? 'text-page-text' : 'text-slate-500 hover:text-slate-700'}`;
+        document.getElementById('btn-register').className = `flex-1 py-2.5 text-sm font-semibold z-10 transition-colors duration-300 ${(isLogin || isForgot) ? 'text-slate-500 hover:text-slate-700' : 'text-page-text'}`;
 
         // Update titles with fade effect
         const title = document.getElementById('form-title');
@@ -311,37 +312,110 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+        const sendOtpBtn = document.getElementById('btn-send-otp');
+        const forgotEmail = document.getElementById('forgot-email');
+        const otpEmailMessage = document.getElementById('otp-email-message');
+        const otpVerifyMessage = document.getElementById('otp-verify-message') || otpEmailMessage;
+        const otpRequestUrl = '{{ route('password.otp.request') }}';
+        const csrfToken = document.querySelector('#form-forgot input[name="_token"]')?.value;
+        let otpRequested = false;
+
+        const showOtpEmailMessage = (text) => {
+            if (!otpEmailMessage) {
+                return;
+            }
+
+            otpEmailMessage.innerText = text;
+            otpEmailMessage.classList.remove('hidden');
+            otpEmailMessage.style.display = '';
+        };
+
+        const showOtpVerifyMessage = (text) => {
+            if (!otpVerifyMessage) {
+                return;
+            }
+
+            otpVerifyMessage.innerText = text;
+            otpVerifyMessage.classList.remove('hidden');
+            otpVerifyMessage.style.display = '';
+        };
+
         const otpInput = document.getElementById('otp-input');
         const verifyBtn = document.getElementById('btn-verify');
+        const otpVerifyUrl = '{{ route('password.otp.verify') }}';
         if (otpInput && verifyBtn) {
             otpInput.addEventListener('input', (e) => {
                 e.target.value = e.target.value.replace(/\D/g, ''); // Allow only numbers
                 if (e.target.value.length === 6) {
                     verifyBtn.disabled = false;
-                    verifyBtn.className = 'w-full btn-primary py-3 rounded-xl text-[#071022] font-bold text-sm shadow-lg shadow-[#FF52A7]/20 hover:-translate-y-0.5 transition-all mt-4';
+                    verifyBtn.className = 'w-full btn-primary py-3 rounded-xl text-page-text font-bold text-sm shadow-lg shadow-party-1/20 hover:-translate-y-0.5 transition-all mt-4';
                 } else {
                     verifyBtn.disabled = true;
                     verifyBtn.className = 'w-full py-3 rounded-xl font-bold text-sm transition-all mt-4 bg-slate-200 text-slate-400 cursor-not-allowed';
                 }
             });
 
-            verifyBtn.addEventListener('click', () => {
-                // Clear input and reset button state
-                otpInput.value = '';
+            verifyBtn.addEventListener('click', async () => {
+                if (!forgotEmail || !csrfToken) {
+                    showOtpVerifyMessage('Missing email or CSRF token. Please refresh and try again.');
+                    return;
+                }
+
+                if (!forgotEmail.value.trim()) {
+                    showOtpVerifyMessage('Please enter your email first.');
+                    forgotEmail.focus();
+                    return;
+                }
+
+                if (!otpRequested) {
+                    showOtpVerifyMessage('Please send OTP first.');
+                    return;
+                }
+
                 verifyBtn.disabled = true;
                 verifyBtn.className = 'w-full py-3 rounded-xl font-bold text-sm transition-all mt-4 bg-slate-200 text-slate-400 cursor-not-allowed';
-                
-                // Switch back to login
-                switchTab('login');
+
+                try {
+                    const response = await fetch(otpVerifyUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'X-CSRF-TOKEN': csrfToken,
+                        },
+                        body: JSON.stringify({
+                            email: forgotEmail.value,
+                            otp: otpInput.value,
+                        }),
+                    });
+
+                    if (!response.ok) {
+                        const errorPayload = await response.json().catch(() => null);
+                        const errorMessage = errorPayload?.message
+                            || errorPayload?.errors?.otp?.[0]
+                            || 'OTP verification failed. Please try again.';
+                        showOtpVerifyMessage(errorMessage);
+                        verifyBtn.disabled = false;
+                        verifyBtn.className = 'w-full btn-primary py-3 rounded-xl text-page-text font-bold text-sm shadow-lg shadow-party-1/20 hover:-translate-y-0.5 transition-all mt-4';
+                        return;
+                    }
+
+                    const payload = await response.json().catch(() => null);
+                    showOtpVerifyMessage(payload?.message || 'OTP verified.');
+
+                    otpInput.value = '';
+                    switchTab('login');
+                } catch (error) {
+                    showOtpVerifyMessage('Network error while verifying OTP. Please try again.');
+                    verifyBtn.disabled = false;
+                    verifyBtn.className = 'w-full btn-primary py-3 rounded-xl text-page-text font-bold text-sm shadow-lg shadow-party-1/20 hover:-translate-y-0.5 transition-all mt-4';
+                }
             });
         }
 
-        const sendOtpBtn = document.getElementById('btn-send-otp');
-        const forgotEmail = document.getElementById('forgot-email');
-        const otpMessage = document.getElementById('otp-message');
-
-        if (sendOtpBtn && forgotEmail && otpMessage) {
-            sendOtpBtn.addEventListener('click', () => {
+        if (sendOtpBtn && forgotEmail && otpEmailMessage) {
+            sendOtpBtn.addEventListener('click', async () => {
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
                 if (!emailRegex.test(forgotEmail.value)) {
                     forgotEmail.focus();
@@ -351,32 +425,70 @@
                     return;
                 }
 
-                // Valid email, start countdown
+                if (!csrfToken) {
+                    showOtpEmailMessage('Missing CSRF token. Please refresh and try again.');
+                    return;
+                }
+
                 sendOtpBtn.disabled = true;
-                sendOtpBtn.innerText = 'Email Sent!';
-                
-                let timeLeft = 120; // 2 minutes
-                otpMessage.classList.remove('hidden');
-                
-                const updateMessage = () => {
-                    const m = Math.floor(timeLeft / 60);
-                    const s = timeLeft % 60;
-                    otpMessage.innerText = `Resend in ${m}:${s.toString().padStart(2, '0')}`;
-                };
-                
-                updateMessage();
-                
-                const timer = setInterval(() => {
-                    timeLeft--;
-                    if (timeLeft <= 0) {
-                        clearInterval(timer);
+                sendOtpBtn.innerText = 'Sending...';
+
+                try {
+                    const response = await fetch(otpRequestUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'X-CSRF-TOKEN': csrfToken,
+                        },
+                        body: JSON.stringify({ email: forgotEmail.value }),
+                    });
+
+                    if (!response.ok) {
+                        const errorPayload = await response.json().catch(() => null);
+                        const errorMessage = errorPayload?.message
+                            || errorPayload?.errors?.email?.[0]
+                            || 'Unable to send OTP. Please try again.';
+                        showOtpEmailMessage(errorMessage);
                         sendOtpBtn.disabled = false;
                         sendOtpBtn.innerText = 'Send OTP';
-                        otpMessage.classList.add('hidden');
-                    } else {
-                        updateMessage();
+                        return;
                     }
-                }, 1000);
+
+                    const payload = await response.json().catch(() => null);
+                    showOtpEmailMessage(payload?.message || 'OTP sent. Check your email.');
+
+                    otpRequested = true;
+
+                    sendOtpBtn.innerText = 'Email Sent!';
+
+                    let timeLeft = 120; // 2 minutes
+
+                    const updateMessage = () => {
+                        const m = Math.floor(timeLeft / 60);
+                        const s = timeLeft % 60;
+                        showOtpEmailMessage(`Resend in ${m}:${s.toString().padStart(2, '0')}`);
+                    };
+
+                    updateMessage();
+
+                    const timer = setInterval(() => {
+                        timeLeft--;
+                        if (timeLeft <= 0) {
+                            clearInterval(timer);
+                            sendOtpBtn.disabled = false;
+                            sendOtpBtn.innerText = 'Send OTP';
+                            otpEmailMessage.classList.add('hidden');
+                        } else {
+                            updateMessage();
+                        }
+                    }, 1000);
+                } catch (error) {
+                    showOtpEmailMessage('Network error while sending OTP. Please try again.');
+                    sendOtpBtn.disabled = false;
+                    sendOtpBtn.innerText = 'Send OTP';
+                }
             });
         }
     });
