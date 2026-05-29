@@ -5,37 +5,37 @@
     <div class="max-w-5xl mx-auto px-6 lg:px-12">
         <div class="text-center mb-10">
             @if(Auth::check() && Auth::user()->plan === 'plus')
-                <h2 class="font-['Playfair_Display',serif] text-4xl lg:text-5xl font-black text-[#071022]">
-                    Your Current <span class="text-[#FF52A7]">Plan</span>
+                <h2 class="font-['Playfair_Display',serif] text-4xl lg:text-5xl font-black text-page-text">
+                    Your Current <span class="text-party-1">Plan</span>
                 </h2>
                 <p class="mt-4 text-slate-600 max-w-xl mx-auto text-base">
                     You're on the Explorer Plus plan. Enjoy all the premium features!
                 </p>
             @elseif(Auth::check())
                 @if(session('onboarding'))
-                    <h2 class="font-['Playfair_Display',serif] text-4xl lg:text-5xl font-black text-[#071022]">
-                        Choose your <span class="text-[#FF52A7]">Journey</span>
+                    <h2 class="font-['Playfair_Display',serif] text-4xl lg:text-5xl font-black text-page-text">
+                        Choose your <span class="text-party-1">Journey</span>
                     </h2>
                     <p class="mt-4 text-slate-600 max-w-xl mx-auto text-base">
                         You've successfully created your account! Choose a plan below to continue to your dashboard.
                     </p>
                 @else
-                    <h2 class="font-['Playfair_Display',serif] text-4xl lg:text-5xl font-black text-[#071022]">
-                        Your Current <span class="text-[#FF52A7]">Plan</span>
+                    <h2 class="font-['Playfair_Display',serif] text-4xl lg:text-5xl font-black text-page-text">
+                        Your Current <span class="text-party-1">Plan</span>
                     </h2>
                     <p class="mt-4 text-slate-600 max-w-xl mx-auto text-base">
                         You're currently on the Free plan. Upgrade to Explorer Plus for unlimited features.
                     </p>
                 @endif
             @else
-                <h2 class="font-['Playfair_Display',serif] text-4xl lg:text-5xl font-black text-[#071022]">
-                    Simple, <span class="text-[#FF52A7]">Transparent</span> Plans
+                <h2 class="font-['Playfair_Display',serif] text-4xl lg:text-5xl font-black text-page-text">
+                    Simple, <span class="text-party-1">Transparent</span> Plans
                 </h2>
                 <p class="mt-4 text-slate-600 max-w-xl mx-auto text-base">
                     Start for free, upgrade when you're ready. No hidden fees, cancel anytime.
                 </p>
                 <p class="mt-2 text-sm text-slate-500">
-                    Already have an account? <a href="{{ route('login') }}" class="text-[#FF52A7] font-semibold hover:underline">Sign in</a>
+                    Already have an account? <a href="{{ route('login') }}" class="text-party-1 font-semibold hover:underline">Sign in</a>
                 </p>
             @endif
         </div>
