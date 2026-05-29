@@ -11,7 +11,7 @@
         <div class="bg-white rounded-[2rem] w-full max-w-md overflow-hidden shadow-2xl animate-float-up" @click.away="showInviteModal = false">
             <div class="p-8 space-y-6">
                 <div class="flex items-center justify-between">
-                    <h3 class="text-2xl font-black text-[#071022]">Invite Buddy</h3>
+                    <h3 class="text-2xl font-black text-page-text">Invite Buddy</h3>
                     <button @click="showInviteModal = false" class="text-slate-400 hover:text-slate-600 transition-colors">
                         <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                     </button>
@@ -21,7 +21,7 @@
                     @csrf
                     <div class="space-y-2">
                         <label class="text-xs font-black text-slate-400 uppercase tracking-widest">Email Address</label>
-                        <input type="email" name="email" required placeholder="friend@example.com" class="w-full px-5 py-4 bg-slate-50 border-2 border-transparent rounded-xl focus:bg-white focus:border-[#FF52A7] outline-none transition-all">
+                        <input type="email" name="email" required placeholder="friend@example.com" class="w-full px-5 py-4 bg-slate-50 border-2 border-transparent rounded-xl focus:bg-white focus:border-party-1 outline-none transition-all">
                         <p class="text-[10px] text-slate-400 font-medium">If they don't have an account, they'll receive an invitation to register & join!</p>
                     </div>
 
@@ -30,14 +30,14 @@
                         <div class="grid grid-cols-2 gap-3">
                             <label class="relative cursor-pointer group">
                                 <input type="radio" name="role" value="viewer" checked class="peer sr-only">
-                                <div class="p-4 border-2 border-slate-100 rounded-xl peer-checked:border-[#FF52A7] peer-checked:bg-[#FF52A7]/5 transition-all text-center">
+                                <div class="p-4 border-2 border-slate-100 rounded-xl peer-checked:border-party-1 peer-checked:bg-party-1/5 transition-all text-center">
                                     <span class="block font-bold text-slate-700">Viewer</span>
                                     <span class="block text-[10px] text-slate-400">Can only view</span>
                                 </div>
                             </label>
                             <label class="relative cursor-pointer group">
                                 <input type="radio" name="role" value="editor" class="peer sr-only">
-                                <div class="p-4 border-2 border-slate-100 rounded-xl peer-checked:border-[#FF52A7] peer-checked:bg-[#FF52A7]/5 transition-all text-center">
+                                <div class="p-4 border-2 border-slate-100 rounded-xl peer-checked:border-party-1 peer-checked:bg-party-1/5 transition-all text-center">
                                     <span class="block font-bold text-slate-700">Editor</span>
                                     <span class="block text-[10px] text-slate-400">Can edit itinerary</span>
                                 </div>
@@ -45,7 +45,7 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="w-full py-4 bg-[#071022] text-white font-black rounded-2xl shadow-xl hover:bg-slate-800 transition-all">
+                    <button type="submit" class="w-full py-4 bg-page-text text-white font-black rounded-2xl shadow-xl hover:bg-slate-800 transition-all">
                         SEND INVITATION
                     </button>
                 </form>

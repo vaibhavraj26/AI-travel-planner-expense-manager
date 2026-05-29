@@ -5,8 +5,8 @@
     <div class="max-w-4xl mx-auto px-6 lg:px-12">
         
         <div class="mb-10 text-center">
-            <h2 class="font-['Playfair_Display',serif] text-4xl font-black text-[#071022]">
-                Complete your <span class="text-[#FF52A7]">Upgrade</span>
+            <h2 class="font-['Playfair_Display',serif] text-4xl font-black text-page-text">
+                Complete your <span class="text-party-1">Upgrade</span>
             </h2>
             <p class="mt-3 text-slate-600 text-base">
                 You're almost there! Choose how you'd like to start your Explorer Plus subscription.
@@ -16,12 +16,12 @@
         <div class="bg-white rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-200 overflow-hidden flex flex-col md:flex-row">
             
             {{-- Left Side: Order Summary --}}
-            <div class="w-full md:w-5/12 bg-gradient-to-br from-[#FFF7F0] to-[#fae593]/10 p-8 border-b md:border-b-0 md:border-r border-slate-200">
+            <div class="w-full md:w-5/12 bg-gradient-to-br from-gold-base to-[#fae593]/10 p-8 border-b md:border-b-0 md:border-r border-slate-200">
                 <div class="mb-8">
-                    <div class="text-[#FF52A7] text-xs font-bold tracking-widest uppercase mb-2">Selected Plan</div>
-                    <div class="font-['Playfair_Display',serif] text-3xl font-black text-[#071022] mb-1">Explorer Plus</div>
+                    <div class="text-party-1 text-xs font-bold tracking-widest uppercase mb-2">Selected Plan</div>
+                    <div class="font-['Playfair_Display',serif] text-3xl font-black text-page-text mb-1">Explorer Plus</div>
                     <div class="flex items-baseline gap-1">
-                        <span class="text-2xl font-bold text-[#071022]">$9</span>
+                        <span class="text-2xl font-bold text-page-text">$9</span>
                         <span class="text-slate-500 text-sm">/month</span>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                     </div>
                     <div class="flex justify-between items-center mt-4 pt-4 border-t border-slate-200/60">
                         <span class="text-slate-800 font-bold">Total Due Today</span>
-                        <span class="text-xl font-bold text-[#071022]">$9.00</span>
+                        <span class="text-xl font-bold text-page-text">$9.00</span>
                     </div>
                 </div>
             </div>
@@ -67,7 +67,7 @@
                         </label>
                         <label class="flex-1 text-center py-3 rounded-lg cursor-pointer bg-white shadow-sm border border-slate-200 transition-all">
                             <input type="radio" name="payment_type" value="direct" class="hidden" checked>
-                            <span class="block text-sm font-bold text-[#071022]">Pay Directly Now</span>
+                            <span class="block text-sm font-bold text-page-text">Pay Directly Now</span>
                         </label>
                     </div>
 
@@ -82,7 +82,7 @@
                         <div id="card-fields">
                             <div class="mb-5">
                                 <label for="cardholder_name" class="block text-xs font-semibold text-slate-700 mb-1">Cardholder Name</label>
-                                <input type="text" id="cardholder_name" name="cardholder_name" class="checkout-input w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#FF52A7]/30 focus:border-[#FF52A7] outline-none text-slate-800 placeholder-slate-400" placeholder="John Doe">
+                                <input type="text" id="cardholder_name" name="cardholder_name" class="checkout-input w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-party-1/30 focus:border-party-1 outline-none text-slate-800 placeholder-slate-400" placeholder="John Doe">
                                 <p class="text-red-500 text-xs mt-1 hidden" id="err-name">Please enter the cardholder name.</p>
                             </div>
 
@@ -92,7 +92,7 @@
                                     <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                         <svg class="w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
                                     </div>
-                                    <input type="text" id="card_number" name="card_number" maxlength="19" class="checkout-input w-full pl-11 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#FF52A7]/30 focus:border-[#FF52A7] outline-none text-slate-800 placeholder-slate-400 font-mono tracking-widest" placeholder="0000 0000 0000 0000">
+                                    <input type="text" id="card_number" name="card_number" maxlength="19" class="checkout-input w-full pl-11 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-party-1/30 focus:border-party-1 outline-none text-slate-800 placeholder-slate-400 font-mono tracking-widest" placeholder="0000 0000 0000 0000">
                                 </div>
                                 <p class="text-red-500 text-xs mt-1 hidden" id="err-card">Please enter a valid 16-digit card number.</p>
                             </div>
@@ -100,12 +100,12 @@
                             <div class="grid grid-cols-2 gap-4">
                                 <div>
                                     <label for="expiry_date" class="block text-xs font-semibold text-slate-700 mb-1">Expiry Date</label>
-                                    <input type="text" id="expiry_date" name="expiry_date" maxlength="5" class="checkout-input w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#FF52A7]/30 focus:border-[#FF52A7] outline-none text-slate-800 placeholder-slate-400 text-center" placeholder="MM/YY">
+                                    <input type="text" id="expiry_date" name="expiry_date" maxlength="5" class="checkout-input w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-party-1/30 focus:border-party-1 outline-none text-slate-800 placeholder-slate-400 text-center" placeholder="MM/YY">
                                     <p class="text-red-500 text-xs mt-1 hidden" id="err-expiry">Enter a valid expiry (MM/YY).</p>
                                 </div>
                                 <div>
                                     <label for="cvc" class="block text-xs font-semibold text-slate-700 mb-1">CVC</label>
-                                    <input type="text" id="cvc" name="cvc" maxlength="4" class="checkout-input w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#FF52A7]/30 focus:border-[#FF52A7] outline-none text-slate-800 placeholder-slate-400 text-center" placeholder="123">
+                                    <input type="text" id="cvc" name="cvc" maxlength="4" class="checkout-input w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-party-1/30 focus:border-party-1 outline-none text-slate-800 placeholder-slate-400 text-center" placeholder="123">
                                     <p class="text-red-500 text-xs mt-1 hidden" id="err-cvc">Enter a valid 3 or 4-digit CVC.</p>
                                 </div>
                             </div>
@@ -115,7 +115,7 @@
                             <p id="terms-text" class="text-xs text-slate-500 mb-4 leading-relaxed">
                                 By proceeding, you agree to our Terms of Service. Your card will be charged $9.00 immediately for the first month.
                             </p>
-                            <button type="submit" id="checkout-btn" class="w-full btn-primary py-3.5 rounded-xl text-[#071022] font-bold text-sm shadow-lg shadow-[#FF52A7]/20 hover:-translate-y-0.5 transition-transform">
+                            <button type="submit" id="checkout-btn" class="w-full btn-primary py-3.5 rounded-xl text-page-text font-bold text-sm shadow-lg shadow-party-1/20 hover:-translate-y-0.5 transition-transform">
                                 Pay $9.00 Now
                             </button>
                         </div>
@@ -183,7 +183,7 @@
                 l.classList.remove('bg-white', 'shadow-sm', 'border-slate-200');
                 l.classList.add('hover:bg-white/50', 'text-slate-500', 'border-transparent');
                 l.querySelector('span').classList.replace('font-bold', 'font-semibold');
-                l.querySelector('span').classList.remove('text-[#071022]');
+                l.querySelector('span').classList.remove('text-page-text');
             });
 
             // Apply active styles to selected
@@ -191,7 +191,7 @@
             activeLabel.classList.remove('hover:bg-white/50', 'text-slate-500', 'border-transparent');
             activeLabel.classList.add('bg-white', 'shadow-sm', 'border-slate-200');
             activeLabel.querySelector('span').classList.replace('font-semibold', 'font-bold');
-            activeLabel.querySelector('span').classList.add('text-[#071022]');
+            activeLabel.querySelector('span').classList.add('text-page-text');
 
             if (e.target.value === 'trial') {
                 setTrialMode();

@@ -49,7 +49,7 @@
 
                 <div class="mt-6">
                     <p class="text-slate-500 text-xs font-bold uppercase tracking-widest">Who Pays Whom</p>
-                    <h3 class="text-xl font-black text-[#071022] mt-1 mb-5">Suggested Transfers</h3>
+                    <h3 class="text-xl font-black text-page-text mt-1 mb-5">Suggested Transfers</h3>
 
                     <div class="space-y-3">
                         @if($settlementTransfers->isEmpty())
@@ -61,14 +61,14 @@
                             @foreach($settlementTransfers as $transfer)
                                 <div class="rounded-2xl bg-slate-50 border border-slate-100 p-4 flex items-center justify-between gap-4">
                                     <div>
-                                        <p class="font-bold text-[#071022]">{{ $transfer['from']->name }}</p>
+                                        <p class="font-bold text-page-text">{{ $transfer['from']->name }}</p>
                                         <p class="text-xs text-slate-500 mt-1">should pay</p>
                                     </div>
-                                    <div class="px-3 py-1 rounded-full bg-[#FF52A7]/10 text-[#FF52A7] text-sm font-black">
+                                    <div class="px-3 py-1 rounded-full bg-party-1/10 text-party-1 text-sm font-black">
                                         ₹{{ number_format($transfer['amount'], 2) }}
                                     </div>
                                     <div class="text-right">
-                                        <p class="font-bold text-[#071022]">{{ $transfer['to']->name }}</p>
+                                        <p class="font-bold text-page-text">{{ $transfer['to']->name }}</p>
                                         <p class="text-xs text-slate-500 mt-1">to settle the trip</p>
                                     </div>
                                 </div>
@@ -78,7 +78,7 @@
                 </div>
             </div>
         @else
-            <div class="bg-gradient-to-br from-[#071022] to-[#1a2942] rounded-3xl p-10 md:p-16 text-center flex flex-col items-center justify-center space-y-8 relative overflow-hidden shadow-2xl">
+            <div class="bg-gradient-to-br from-page-text to-[#1a2942] rounded-3xl p-10 md:p-16 text-center flex flex-col items-center justify-center space-y-8 relative overflow-hidden shadow-2xl">
                 <div class="w-24 h-24 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-yellow-400 border border-white/20 relative z-10 shadow-[0_0_40px_rgba(250,204,21,0.2)]">
                     <svg class="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
                 </div>
@@ -87,7 +87,7 @@
                     <p class="text-white/70 max-w-lg mx-auto text-sm md:text-base leading-relaxed">Upgrade to <strong class="text-white">Explorer Plus</strong> to automatically split bills, view suggested transfers, and mark settlements as paid.</p>
                 </div>
 
-                <a href="{{ route('pricing') }}" class="relative z-10 btn-primary py-3.5 px-8 rounded-xl text-[#071022] font-black shadow-[0_0_20px_rgba(255,82,167,0.4)] hover:scale-105 hover:shadow-[0_0_30px_rgba(255,82,167,0.6)] transition-all duration-300 flex items-center gap-2">
+                <a href="{{ route('pricing') }}" class="relative z-10 btn-primary py-3.5 px-8 rounded-xl text-page-text font-black shadow-[0_0_20px_rgba(255,82,167,0.4)] hover:scale-105 hover:shadow-[0_0_30px_rgba(255,82,167,0.6)] transition-all duration-300 flex items-center gap-2">
                     View Premium Plans
                     <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
                 </a>

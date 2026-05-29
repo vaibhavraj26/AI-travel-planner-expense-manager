@@ -1,7 +1,7 @@
 {{-- Itinerary Tab --}}
         <div x-show="activeTab === 'itinerary'" x-cloak class="space-y-8">
             <div class="flex items-center justify-between">
-                <h2 class="text-2xl font-bold text-[#071022]">Daily Schedule</h2>
+                <h2 class="text-2xl font-bold text-page-text">Daily Schedule</h2>
                 @if($trip->user_id === Auth::id())
                     <button @click="showActivityModal = true" class="btn-primary py-2.5 px-5 rounded-xl text-xs font-bold flex items-center gap-2">
                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
@@ -29,16 +29,16 @@
                             <button @click="openDay = openDay === dateKey ? null : dateKey" 
                                     class="w-full flex items-center justify-between gap-6 mb-4 p-4 rounded-3xl hover:bg-slate-50 transition-all text-left group">
                                 <div class="flex items-center gap-6">
-                                    <div class="w-12 h-12 rounded-2xl bg-white border-2 border-[#FF52A7] flex flex-col items-center justify-center shadow-md z-10 group-hover:scale-105 transition-transform">
-                                        <span class="text-[10px] font-black text-[#FF52A7] uppercase leading-none">{{ \Carbon\Carbon::parse($date)->format('M') }}</span>
-                                        <span class="text-lg font-black text-[#071022] leading-none">{{ \Carbon\Carbon::parse($date)->format('d') }}</span>
+                                    <div class="w-12 h-12 rounded-2xl bg-white border-2 border-party-1 flex flex-col items-center justify-center shadow-md z-10 group-hover:scale-105 transition-transform">
+                                        <span class="text-[10px] font-black text-party-1 uppercase leading-none">{{ \Carbon\Carbon::parse($date)->format('M') }}</span>
+                                        <span class="text-lg font-black text-page-text leading-none">{{ \Carbon\Carbon::parse($date)->format('d') }}</span>
                                     </div>
                                     <div>
-                                        <h3 class="text-xl font-black text-[#071022]">{{ \Carbon\Carbon::parse($date)->format('l, F j') }}</h3>
+                                        <h3 class="text-xl font-black text-page-text">{{ \Carbon\Carbon::parse($date)->format('l, F j') }}</h3>
                                         <p class="text-sm text-slate-500 font-medium">{{ $activities->count() }} activities planned</p>
                                     </div>
                                 </div>
-                                <div class="p-2 rounded-full bg-slate-100 text-slate-400 group-hover:text-[#FF52A7] group-hover:bg-[#FF52A7]/10 transition-all">
+                                <div class="p-2 rounded-full bg-slate-100 text-slate-400 group-hover:text-party-1 group-hover:bg-party-1/10 transition-all">
                                     <svg class="w-5 h-5 transition-transform duration-300" :class="openDay === dateKey ? 'rotate-180' : ''" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
                                     </svg>
@@ -60,13 +60,13 @@
                                         </form>
                                         <div class="flex flex-col md:flex-row gap-6">
                                             <div class="w-full md:w-32 shrink-0">
-                                                <div class="text-sm font-black text-[#FF52A7]">
+                                                <div class="text-sm font-black text-party-1">
                                                     {{ $activity->start_time ? \Carbon\Carbon::parse($activity->start_time)->format('g:i A') : 'All Day' }}
                                                 </div>
                                                 <div class="text-xs font-bold text-slate-400 mt-1 uppercase tracking-wider">{{ $activity->type }}</div>
                                             </div>
                                             <div class="flex-1 space-y-2">
-                                                <h4 class="text-lg font-bold text-[#071022] group-hover:text-[#FF52A7] transition-colors">{{ $activity->title }}</h4>
+                                                <h4 class="text-lg font-bold text-page-text group-hover:text-party-1 transition-colors">{{ $activity->title }}</h4>
                                                 @if($activity->location)
                                                     <div class="flex items-center gap-1.5 text-slate-500 text-sm font-medium">
                                                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>

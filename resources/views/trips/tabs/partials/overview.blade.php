@@ -16,7 +16,7 @@
                 <div class="lg:col-span-2 space-y-6">
                     <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm space-y-6">
                         <div>
-                            <h2 class="text-xl font-bold text-[#071022] mb-4">About this trip</h2>
+                            <h2 class="text-xl font-bold text-page-text mb-4">About this trip</h2>
                             <p class="text-slate-600 leading-relaxed">
                                 {{ $trip->description ?? 'No description provided for this trip yet. Edit the trip to add more details about your plans, goals, and inspiration for this journey.' }}
                             </p>
@@ -24,21 +24,21 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                             <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100">
                                 <p class="text-slate-500 font-semibold">Destination</p>
-                                <p class="mt-1 font-bold text-[#071022]">{{ $trip->destination }}</p>
+                                <p class="mt-1 font-bold text-page-text">{{ $trip->destination }}</p>
                             </div>
                             <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100">
                                 <p class="text-slate-500 font-semibold">Status</p>
-                                <p class="mt-1 font-bold text-[#071022]">{{ ucfirst($trip->status) }}</p>
+                                <p class="mt-1 font-bold text-page-text">{{ ucfirst($trip->status) }}</p>
                             </div>
                             <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100">
                                 <p class="text-slate-500 font-semibold">Dates</p>
-                                <p class="mt-1 font-bold text-[#071022]">
+                                <p class="mt-1 font-bold text-page-text">
                                     {{ \Carbon\Carbon::parse($trip->start_date)->format('M d') }} – {{ \Carbon\Carbon::parse($trip->end_date)->format('M d, Y') }}
                                 </p>
                             </div>
                             <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100">
                                 <p class="text-slate-500 font-semibold">Duration</p>
-                                <p class="mt-1 font-bold text-[#071022]">
+                                <p class="mt-1 font-bold text-page-text">
                                     {{ \Carbon\Carbon::parse($trip->start_date)->diffInDays(\Carbon\Carbon::parse($trip->end_date)) + 1 }} days
                                 </p>
                             </div>
@@ -52,16 +52,16 @@
                     @endphp
                     <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm space-y-6">
                         <div>
-                            <h3 class="text-lg font-bold text-[#071022]">People & Next Activity</h3>
+                            <h3 class="text-lg font-bold text-page-text">People & Next Activity</h3>
                         </div>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                             <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100">
                                 <p class="text-slate-500 font-semibold">Trip Owner</p>
-                                <p class="mt-1 font-bold text-[#071022]">{{ $trip->user->name }}</p>
+                                <p class="mt-1 font-bold text-page-text">{{ $trip->user->name }}</p>
                             </div>
                             <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100">
                                 <p class="text-slate-500 font-semibold">Collaborators</p>
-                                <p class="mt-1 font-bold text-[#071022]">
+                                <p class="mt-1 font-bold text-page-text">
                                     {{ $collaborators->isEmpty() ? 'None yet' : $collaborators->pluck('name')->join(', ') }}
                                 </p>
                             </div>
@@ -70,7 +70,7 @@
                                 @if($nextActivity)
                                     <div class="flex items-center justify-between gap-3">
                                         <div>
-                                            <p class="mt-1 font-bold text-[#071022]">{{ $nextActivity->title }}</p>
+                                            <p class="mt-1 font-bold text-page-text">{{ $nextActivity->title }}</p>
                                             <p class="text-xs text-slate-500 mt-1">
                                                 {{ \Carbon\Carbon::parse($nextActivity->date)->format('M d, Y') }}
                                                 @if($nextActivity->start_time)
@@ -92,7 +92,7 @@
                                         @endif
                                     </div>
                                 @else
-                                    <p class="mt-1 font-bold text-[#071022]">No upcoming activities</p>
+                                    <p class="mt-1 font-bold text-page-text">No upcoming activities</p>
                                     <p class="text-xs text-slate-500 mt-1">Add activities to see what is next.</p>
                                 @endif
                             </div>
@@ -135,24 +135,24 @@
                 @endphp
                 <div class="space-y-6">
                     <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm space-y-4">
-                        <h2 class="text-lg font-bold text-[#071022]">Trip Countdown & Status</h2>
+                        <h2 class="text-lg font-bold text-page-text">Trip Countdown & Status</h2>
                         <div class="p-4 rounded-2xl bg-slate-50 border border-slate-100">
                             <p class="text-slate-500 font-semibold text-sm">Current Status</p>
-                            <p class="mt-1 font-black text-[#071022] text-lg">{{ $tripStatusSummary }}</p>
+                            <p class="mt-1 font-black text-page-text text-lg">{{ $tripStatusSummary }}</p>
                             <p class="text-xs text-slate-500 mt-1">{{ $tripStatusMeta }}</p>
                         </div>
                     </div>
 
                     <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm space-y-4">
-                        <h2 class="text-lg font-bold text-[#071022]">Budget Health</h2>
+                        <h2 class="text-lg font-bold text-page-text">Budget Health</h2>
                         <div class="grid grid-cols-3 gap-3 text-center">
                             <div class="p-3 rounded-2xl bg-slate-50 border border-slate-100">
                                 <p class="text-[11px] text-slate-500 font-semibold">Budget</p>
-                                <p class="mt-1 text-sm font-black text-[#071022]">₹{{ number_format($budgetTotal, 2) }}</p>
+                                <p class="mt-1 text-sm font-black text-page-text">₹{{ number_format($budgetTotal, 2) }}</p>
                             </div>
                             <div class="p-3 rounded-2xl bg-slate-50 border border-slate-100">
                                 <p class="text-[11px] text-slate-500 font-semibold">Spent</p>
-                                <p class="mt-1 text-sm font-black text-[#071022]">₹{{ number_format($totalSpent, 2) }}</p>
+                                <p class="mt-1 text-sm font-black text-page-text">₹{{ number_format($totalSpent, 2) }}</p>
                             </div>
                             <div class="p-3 rounded-2xl bg-slate-50 border border-slate-100">
                                 <p class="text-[11px] text-slate-500 font-semibold">Remaining</p>
@@ -173,13 +173,13 @@
                     </div>
 
                     <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm space-y-4">
-                        <h2 class="text-lg font-bold text-[#071022]">Completion Progress</h2>
+                        <h2 class="text-lg font-bold text-page-text">Completion Progress</h2>
                         <div class="flex items-end justify-between">
                             <p class="text-sm text-slate-500">Activities done</p>
-                            <p class="text-sm font-black text-[#071022]">{{ $completedActivities }} / {{ $totalActivities }}</p>
+                            <p class="text-sm font-black text-page-text">{{ $completedActivities }} / {{ $totalActivities }}</p>
                         </div>
                         <div class="h-2 rounded-full bg-slate-100 overflow-hidden">
-                            <div class="h-full bg-[#FF52A7]" style="width: {{ $completionPercent }}%;"></div>
+                            <div class="h-full bg-party-1" style="width: {{ $completionPercent }}%;"></div>
                         </div>
                         <p class="text-xs text-slate-500">{{ $completionPercent }}% completed</p>
                     </div>

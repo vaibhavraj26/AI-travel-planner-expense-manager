@@ -18,8 +18,8 @@
                 </div>
             </div>
 
-            <h3 class="text-2xl font-bold text-[#071022] text-center mb-2">Remove Member?</h3>
-            <p class="text-slate-500 text-center mb-4">Are you sure you want to remove <strong class="text-[#071022]" x-text="removingMemberName"></strong> from this trip? This will revoke their access.</p>
+            <h3 class="text-2xl font-bold text-page-text text-center mb-2">Remove Member?</h3>
+            <p class="text-slate-500 text-center mb-4">Are you sure you want to remove <strong class="text-page-text" x-text="removingMemberName"></strong> from this trip? This will revoke their access.</p>
 
             <div class="flex gap-3">
                 <button @click="showRemoveMemberModal = false" class="flex-1 px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-xl transition-colors">

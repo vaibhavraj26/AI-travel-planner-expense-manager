@@ -11,10 +11,10 @@
             <button type="button" @click="showBanner = false" class="absolute right-0 top-0 p-2 rounded-full hover:bg-white/70 text-slate-500 transition-colors" aria-label="Dismiss">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
             </button>
-            <span class="inline-flex items-center gap-2 rounded-full bg-[#071022] text-white text-[10px] font-black uppercase tracking-widest px-3 py-1">
+            <span class="inline-flex items-center gap-2 rounded-full bg-page-text text-white text-[10px] font-black uppercase tracking-widest px-3 py-1">
                 AI Planner
             </span>
-            <h1 class="mt-4 text-3xl sm:text-4xl font-black text-[#071022] tracking-tight">
+            <h1 class="mt-4 text-3xl sm:text-4xl font-black text-page-text tracking-tight">
                 Plan your trip in minutes
             </h1>
             <p class="mt-3 text-slate-600 text-sm sm:text-base max-w-2xl">
@@ -28,12 +28,12 @@
 
     @if(Auth::user()->plan !== 'plus')
         <div class="rounded-[2rem] border border-amber-200 bg-amber-50/60 p-8">
-            <h2 class="text-xl font-black text-[#071022]">Upgrade to Explorer Plus</h2>
+            <h2 class="text-xl font-black text-page-text">Upgrade to Explorer Plus</h2>
             <p class="mt-2 text-slate-600 text-sm">
                 AI Planner is available on Explorer Plus. Upgrade to generate full itineraries and share them with your travel buddies.
             </p>
             <div class="mt-6 flex flex-wrap items-center gap-3">
-                <a href="{{ route('pricing') }}" class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-[#FF52A7] text-white font-black text-sm shadow-lg shadow-[#FF52A7]/20">
+                <a href="{{ route('pricing') }}" class="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-party-1 text-white font-black text-sm shadow-lg shadow-party-1/20">
                     View Plans
                 </a>
                 <span class="text-xs font-semibold text-amber-700">Free plan users can still browse existing trips.</span>
@@ -100,7 +100,7 @@
                 </div>
             </div>
 
-            <button type="submit" :disabled="submitting" :class="submitting ? 'opacity-60 cursor-not-allowed' : ''" class="w-full py-4 rounded-2xl bg-[#071022] text-white font-black text-sm shadow-lg shadow-slate-900/20 hover:translate-y-[-1px] transition-transform">
+            <button type="submit" :disabled="submitting" :class="submitting ? 'opacity-60 cursor-not-allowed' : ''" class="w-full py-4 rounded-2xl bg-page-text text-white font-black text-sm shadow-lg shadow-slate-900/20 hover:translate-y-[-1px] transition-transform">
                 <span x-show="!submitting">Generate & Save AI Plan</span>
                 <span x-show="submitting" x-cloak class="inline-flex items-center gap-3">
                     <svg class="w-5 h-5 animate-spin text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -114,11 +114,11 @@
             {{-- Submitting overlay for visual feedback when generating plan --}}
             <div x-show="submitting" x-cloak class="fixed inset-0 bg-white/70 backdrop-blur-sm z-50 flex items-center justify-center pointer-events-none">
                 <div class="flex flex-col items-center gap-4 p-6 rounded-xl">
-                    <svg class="w-12 h-12 animate-spin text-[#071022]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <svg class="w-12 h-12 animate-spin text-page-text" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                         <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                         <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
                     </svg>
-                    <div class="text-sm font-black text-[#071022]">Creating best plan for you</div>
+                    <div class="text-sm font-black text-page-text">Creating best plan for you</div>
                     <div class="text-xs text-slate-500">This might take a few moments — please keep this tab open.</div>
                 </div>
             </div>

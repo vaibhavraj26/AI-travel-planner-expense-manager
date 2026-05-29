@@ -13,7 +13,7 @@
             <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 to-blue-600"></div>
             
             <div class="flex justify-between items-center mb-6">
-                <h3 class="text-2xl font-bold text-[#071022]">Edit Transaction</h3>
+                <h3 class="text-2xl font-bold text-page-text">Edit Transaction</h3>
                 <button @click="showEditModal = false" class="text-slate-400 hover:text-slate-600 transition-colors">
                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
                 </button>
@@ -80,7 +80,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="w-full btn-primary py-4 rounded-xl text-[#071022] font-black text-sm shadow-xl shadow-blue-500/20 hover:-translate-y-1 transition-transform">
+                <button type="submit" class="w-full btn-primary py-4 rounded-xl text-page-text font-black text-sm shadow-xl shadow-blue-500/20 hover:-translate-y-1 transition-transform">
                     Save Changes
                 </button>
             </form>

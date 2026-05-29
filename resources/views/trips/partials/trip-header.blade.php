@@ -7,7 +7,7 @@
         <div class="absolute bottom-8 left-8 right-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div class="space-y-2">
                 <div class="flex items-center gap-3">
-                    <span class="px-3 py-1 bg-[#FF52A7] rounded-full text-[10px] font-black text-white uppercase tracking-widest">
+                    <span class="px-3 py-1 bg-party-1 rounded-full text-[10px] font-black text-white uppercase tracking-widest">
                         {{ $trip->status }}
                     </span>
                     <div class="flex items-center gap-1 text-white/80 text-sm font-medium">

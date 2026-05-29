@@ -4,13 +4,13 @@
             <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm">
                     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
                         <div>
-                            <h2 class="text-xl font-bold text-[#071022]">Budget & Expenses</h2>
+                            <h2 class="text-xl font-bold text-page-text">Budget & Expenses</h2>
                             <p class="text-slate-500 text-sm mt-1">Track your spending for this trip.</p>
                         </div>
                         @if($trip->user_id === Auth::id())
                             <div class="flex items-center gap-3">
                                 @if(!$trip->budget)
-                                    <button @click="showBudgetModal = true" class="btn-primary py-2.5 px-5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-lg shadow-[#FF52A7]/20 hover:-translate-y-0.5 transition-transform">
+                                    <button @click="showBudgetModal = true" class="btn-primary py-2.5 px-5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-lg shadow-party-1/20 hover:-translate-y-0.5 transition-transform">
                                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
                                         Add Budget
                                     </button>
@@ -19,7 +19,7 @@
                                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
                                         Update Budget
                                     </button>
-                                    <button @click="showExpenseModal = true" class="btn-primary py-2.5 px-5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-lg shadow-[#FF52A7]/20 hover:-translate-y-0.5 transition-transform">
+                                    <button @click="showExpenseModal = true" class="btn-primary py-2.5 px-5 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-lg shadow-party-1/20 hover:-translate-y-0.5 transition-transform">
                                         <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>
                                         Add Expense
                                     </button>
@@ -29,13 +29,13 @@
                     </div>
                     
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                        <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100 relative overflow-hidden group hover:border-[#FF52A7]/30 transition-colors">
+                        <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100 relative overflow-hidden group hover:border-party-1/30 transition-colors">
                             <p class="text-slate-500 text-sm font-medium mb-1 relative z-10">Total Budget</p>
-                            <p class="text-3xl font-black text-[#071022] relative z-10">₹{{ number_format($trip->budget ?? 0, 2) }}</p>
+                            <p class="text-3xl font-black text-page-text relative z-10">₹{{ number_format($trip->budget ?? 0, 2) }}</p>
                         </div>
-                        <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100 relative overflow-hidden group hover:border-[#FF52A7]/30 transition-colors">
+                        <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100 relative overflow-hidden group hover:border-party-1/30 transition-colors">
                             <p class="text-slate-500 text-sm font-medium mb-1 relative z-10">Total Spent</p>
-                            <p class="text-3xl font-black text-[#FF52A7] relative z-10">₹{{ number_format($totalSpent, 2) }}</p>
+                            <p class="text-3xl font-black text-party-1 relative z-10">₹{{ number_format($totalSpent, 2) }}</p>
                         </div>
                         <div class="bg-slate-50 rounded-2xl p-6 border border-slate-100 relative overflow-hidden group hover:border-emerald-500/30 transition-colors">
                             <p class="text-slate-500 text-sm font-medium mb-1 relative z-10">Remaining</p>
@@ -50,7 +50,7 @@
                             <div class="w-20 h-20 bg-white rounded-full shadow-sm flex items-center justify-center text-slate-300 mx-auto mb-5 border border-slate-100">
                                 <svg class="w-10 h-10" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
                             </div>
-                            <h3 class="text-xl font-bold text-[#071022]">No transactions yet</h3>
+                            <h3 class="text-xl font-bold text-page-text">No transactions yet</h3>
                             <p class="text-slate-500 text-sm mt-2 max-w-sm mx-auto">Set a budget or start tracking your spending for this trip.</p>
                         </div>
                     @else
@@ -60,7 +60,7 @@
                                 @php
                                     $isDeleted = $transaction->deleted_at !== null;
                                     $containerClass = $isDeleted ? 'bg-red-50 border-red-200 opacity-50' : 'bg-white border-slate-100 hover:shadow-sm';
-                                    $textClass = $isDeleted ? 'text-red-500' : 'text-[#071022]';
+                                    $textClass = $isDeleted ? 'text-red-500' : 'text-page-text';
                                 @endphp
                                 @if($transaction->type === 'expense')
                                     <div class="flex items-center justify-between p-4 border rounded-2xl transition-shadow {{ $containerClass }}">
@@ -158,10 +158,10 @@
                     @endif
                 </div>
             @else
-                <div class="bg-gradient-to-br from-[#071022] to-[#1a2942] rounded-3xl p-10 md:p-16 text-center flex flex-col items-center justify-center space-y-8 relative overflow-hidden shadow-2xl">
+                <div class="bg-gradient-to-br from-page-text to-[#1a2942] rounded-3xl p-10 md:p-16 text-center flex flex-col items-center justify-center space-y-8 relative overflow-hidden shadow-2xl">
                     <!-- Decorative Background -->
-                    <div class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-[#FF52A7]/20 to-transparent rounded-full blur-3xl translate-x-1/2 -translate-y-1/2"></div>
-                    <div class="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-[#7C3AED]/20 to-transparent rounded-full blur-3xl -translate-x-1/2 translate-y-1/2"></div>
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-party-1/20 to-transparent rounded-full blur-3xl translate-x-1/2 -translate-y-1/2"></div>
+                    <div class="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-accent/20 to-transparent rounded-full blur-3xl -translate-x-1/2 translate-y-1/2"></div>
                     
                     <div class="w-24 h-24 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center text-yellow-400 border border-white/20 relative z-10 shadow-[0_0_40px_rgba(250,204,21,0.2)]">
                         <svg class="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
@@ -174,7 +174,7 @@
                         </p>
                     </div>
                     
-                    <a href="{{ route('pricing') }}" class="relative z-10 btn-primary py-3.5 px-8 rounded-xl text-[#071022] font-black shadow-[0_0_20px_rgba(255,82,167,0.4)] hover:scale-105 hover:shadow-[0_0_30px_rgba(255,82,167,0.6)] transition-all duration-300 flex items-center gap-2">
+                    <a href="{{ route('pricing') }}" class="relative z-10 btn-primary py-3.5 px-8 rounded-xl text-page-text font-black shadow-[0_0_20px_rgba(255,82,167,0.4)] hover:scale-105 hover:shadow-[0_0_30px_rgba(255,82,167,0.6)] transition-all duration-300 flex items-center gap-2">
                         View Premium Plans
                         <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
                     </a>

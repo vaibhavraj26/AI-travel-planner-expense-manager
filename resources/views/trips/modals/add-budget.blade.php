@@ -10,10 +10,10 @@
          x-cloak>
         <div @click.away="showBudgetModal = false" 
              class="bg-white rounded-[2.5rem] w-full max-w-md p-8 shadow-2xl relative overflow-hidden">
-            <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[#FFB800] to-[#FF52A7]"></div>
+            <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-[#FFB800] to-party-1"></div>
             
             <div class="flex justify-between items-center mb-6">
-                <h3 class="text-2xl font-bold text-[#071022]">
+                <h3 class="text-2xl font-bold text-page-text">
                     @if(!$trip->budget)
                         Add Budget
                     @else
@@ -79,7 +79,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="w-full btn-primary py-4 rounded-2xl text-[#071022] font-black text-sm hover:-translate-y-1 transition-transform">
+                <button type="submit" class="w-full btn-primary py-4 rounded-2xl text-page-text font-black text-sm hover:-translate-y-1 transition-transform">
                     @if(!$trip->budget)
                         Set Budget
                     @else

@@ -3,7 +3,7 @@
             <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm">
                 <div class="flex items-center justify-between mb-8">
                     <div>
-                        <h2 class="text-xl font-bold text-[#071022]">Travel Buddies</h2>
+                        <h2 class="text-xl font-bold text-page-text">Travel Buddies</h2>
                         <p class="text-slate-500 text-sm mt-1">Manage who can see and edit this itinerary.</p>
                     </div>
                     @if($trip->user_id === Auth::id())
@@ -26,11 +26,11 @@
                                 </div>
                             @endif
                             <div>
-                                <h3 class="font-bold text-[#071022]">{{ $trip->user->name }}</h3>
+                                <h3 class="font-bold text-page-text">{{ $trip->user->name }}</h3>
                                 <p class="text-slate-500 text-xs">{{ $trip->user->email }}</p>
                             </div>
                         </div>
-                        <span class="px-3 py-1 bg-[#071022] text-white text-[10px] font-black uppercase rounded-full tracking-widest">Owner</span>
+                        <span class="px-3 py-1 bg-page-text text-white text-[10px] font-black uppercase rounded-full tracking-widest">Owner</span>
                     </div>
 
                     {{-- Members --}}
@@ -45,7 +45,7 @@
                                     </div>
                                 @endif
                                 <div>
-                                    <h3 class="font-bold text-[#071022]">{{ $member->name }}</h3>
+                                    <h3 class="font-bold text-page-text">{{ $member->name }}</h3>
                                     <p class="text-slate-500 text-xs">{{ $member->email }}</p>
                                     @if(!$member->pivot->is_accepted)
                                         @php
@@ -90,7 +90,7 @@
                                     <span class="text-lg font-black uppercase">{{ strtoupper(substr($username, 0, 1)) }}</span>
                                 </div>
                                 <div>
-                                    <h3 class="font-bold text-[#071022]">{{ $username }}</h3>
+                                    <h3 class="font-bold text-page-text">{{ $username }}</h3>
                                     <p class="text-slate-400 text-xs">{{ $invitation->email }} • Registration Pending</p>
                                     @php
                                         $inviter = isset($inviters) ? $inviters->get($invitation->invited_by) : null;

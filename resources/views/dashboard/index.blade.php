@@ -13,11 +13,11 @@
     <!-- Header Section -->
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-            <h1 class="text-3xl font-bold text-[#071022] font-['Playfair_Display',serif]">Welcome back, {{ Auth::user()->name ?? 'Traveler' }}!</h1>
+            <h1 class="text-3xl font-bold text-page-text font-['Playfair_Display',serif]">Welcome back, {{ Auth::user()->name ?? 'Traveler' }}!</h1>
             <p class="text-slate-500 mt-1">Here is what's happening with your trips today.</p>
         </div>
         <div>
-            <a href="{{ route('trips.create') }}" class="btn-primary py-2.5 px-5 rounded-xl text-[#071022] font-bold text-sm shadow-md shadow-[#FF52A7]/20 hover:-translate-y-0.5 transition-transform inline-flex items-center gap-2">
+            <a href="{{ route('trips.create') }}" class="btn-primary py-2.5 px-5 rounded-xl text-page-text font-bold text-sm shadow-md shadow-party-1/20 hover:-translate-y-0.5 transition-transform inline-flex items-center gap-2">
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
                 New Trip
             </a>
@@ -29,12 +29,12 @@
         <!-- Upcoming Trips -->
         <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
             <div class="flex items-center gap-4 mb-4">
-                <div class="w-12 h-12 rounded-full bg-[#FF52A7]/10 flex items-center justify-center text-[#FF52A7]">
+                <div class="w-12 h-12 rounded-full bg-party-1/10 flex items-center justify-center text-party-1">
                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 </div>
                 <div>
                     <h3 class="text-slate-500 text-sm font-semibold">Upcoming Trips</h3>
-                    <p class="text-2xl font-bold text-[#071022]">{{ $upcomingTripsCount }}</p>
+                    <p class="text-2xl font-bold text-page-text">{{ $upcomingTripsCount }}</p>
                 </div>
             </div>
             <p class="text-xs text-slate-500">
@@ -52,12 +52,12 @@
         <!-- Active Itineraries -->
         <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
             <div class="flex items-center gap-4 mb-4">
-                <div class="w-12 h-12 rounded-full bg-[#7C3AED]/10 flex items-center justify-center text-[#7C3AED]">
+                <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-accent">
                     <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
                 </div>
                 <div>
                     <h3 class="text-slate-500 text-sm font-semibold">Active Itineraries</h3>
-                    <p class="text-2xl font-bold text-[#071022]">{{ $activeItinerariesCount }}</p>
+                    <p class="text-2xl font-bold text-page-text">{{ $activeItinerariesCount }}</p>
                 </div>
             </div>
             <p class="text-xs text-slate-500">Trips currently in progress</p>
@@ -71,7 +71,7 @@
                 </div>
                 <div>
                     <h3 class="text-slate-500 text-sm font-semibold">Total Budget</h3>
-                    <p class="text-2xl font-bold text-[#071022]">{{ $formatCurrency($totalBudget) }}</p>
+                    <p class="text-2xl font-bold text-page-text">{{ $formatCurrency($totalBudget) }}</p>
                 </div>
             </div>
             <p class="text-xs text-slate-500">Across {{ $tripSummaries->count() }} trip{{ $tripSummaries->count() === 1 ? '' : 's' }}</p>
@@ -83,8 +83,8 @@
         <!-- Recent Activity -->
         <div class="lg:col-span-2 bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
             <div class="flex items-center justify-between mb-6">
-                <h2 class="text-lg font-bold text-[#071022]">Recent Activity</h2>
-                <a href="{{ route('trips.index') }}" class="text-sm font-medium text-[#7C3AED] hover:underline">View All</a>
+                <h2 class="text-lg font-bold text-page-text">Recent Activity</h2>
+                <a href="{{ route('trips.index') }}" class="text-sm font-medium text-accent hover:underline">View All</a>
             </div>
             
             <div class="space-y-6">
@@ -119,16 +119,16 @@
         <!-- Quick Actions & Account settings -->
         <div class="space-y-6">
             <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
-                <h2 class="text-lg font-bold text-[#071022] mb-4">Quick Actions</h2>
+                <h2 class="text-lg font-bold text-page-text mb-4">Quick Actions</h2>
                 <div class="space-y-3">
-                    <a href="{{ route('trips.create') }}" class="w-full text-left px-4 py-3 rounded-xl border border-slate-200 hover:border-[#FF52A7] hover:bg-[#FF52A7]/5 transition-colors flex items-center gap-3 group">
-                        <div class="text-slate-400 group-hover:text-[#FF52A7]">
+                    <a href="{{ route('trips.create') }}" class="w-full text-left px-4 py-3 rounded-xl border border-slate-200 hover:border-party-1 hover:bg-party-1/5 transition-colors flex items-center gap-3 group">
+                        <div class="text-slate-400 group-hover:text-party-1">
                             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
                         </div>
                         <span class="text-sm font-medium text-slate-700 group-hover:text-slate-900">Create New Trip</span>
                     </a>
-                    <a href="{{ route('trips.index') }}" class="w-full text-left px-4 py-3 rounded-xl border border-slate-200 hover:border-[#7C3AED] hover:bg-[#7C3AED]/5 transition-colors flex items-center gap-3 group">
-                        <div class="text-slate-400 group-hover:text-[#7C3AED]">
+                    <a href="{{ route('trips.index') }}" class="w-full text-left px-4 py-3 rounded-xl border border-slate-200 hover:border-accent hover:bg-accent/5 transition-colors flex items-center gap-3 group">
+                        <div class="text-slate-400 group-hover:text-accent">
                             <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
                         </div>
                         <span class="text-sm font-medium text-slate-700 group-hover:text-slate-900">View All Trips</span>
