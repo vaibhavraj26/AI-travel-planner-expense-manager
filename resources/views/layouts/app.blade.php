@@ -12,6 +12,7 @@
     
 </head>
 <body>
+    <x-data-warning />
 
     @yield('content')
     
