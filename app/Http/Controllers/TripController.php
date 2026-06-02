@@ -642,7 +642,7 @@ class TripController extends Controller
 
         $trip->sharedUsers()->detach(Auth::id());
 
-        return redirect()->route('trips.index')->with('success', 'Invitation declined successfully.');
+        return redirect()->route('home')->with('success', 'Invitation declined successfully.');
     }
 
     /**
