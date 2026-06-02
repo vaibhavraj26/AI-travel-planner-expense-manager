@@ -74,7 +74,8 @@
                     <li><a href="#" class="text-slate-400 hover:text-white transition-colors text-sm">Careers</a></li>
                     <li><a href="#" class="text-slate-400 hover:text-white transition-colors text-sm">Blog</a></li>
                     <li><a href="#" class="text-slate-400 hover:text-white transition-colors text-sm">Contact</a></li>
-                    <li><a href="#" class="text-slate-400 hover:text-white transition-colors text-sm">Partners</a></li>
+                    <li><a href="{{ route('terms') }}" class="text-slate-400 hover:text-white transition-colors text-sm">Terms of Service</a></li>
+                    <li><a href="{{ route('privacy') }}" class="text-slate-400 hover:text-white transition-colors text-sm">Privacy Policy</a></li>
                 </ul>
             </div>
 
