@@ -7,6 +7,7 @@ use App\Models\Expense;
 use App\Models\ItineraryActivity;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,6 +20,14 @@ Route::get('/', function () {
 Route::get('/pricing', function () {
     return view('pricing');
 })->name('pricing');
+
+Route::get('/terms', function () {
+    return view('legal.terms');
+})->name('terms');
+
+Route::get('/privacy', function () {
+    return view('legal.privacy');
+})->name('privacy');
 
 Route::get('/blog', function () {
     return view('blog.index');
@@ -137,13 +146,30 @@ Route::middleware('auth')->group(function () {
             ->take(4)
             ->values();
 
+        $pendingInvitations = DB::table('trip_user')
+            ->join('trips', 'trip_user.trip_id', '=', 'trips.id')
+            ->leftJoin('users as inviters', 'trip_user.invited_by', '=', 'inviters.id')
+            ->where('trip_user.user_id', $user->id)
+            ->where('trip_user.is_accepted', false)
+            ->select([
+                'trips.id as trip_id',
+                'trips.title as trip_title',
+                'trips.destination as trip_destination',
+                'trips.start_date as trip_start_date',
+                'trip_user.role as role',
+                'inviters.name as inviter_name',
+            ])
+            ->orderByDesc('trips.created_at')
+            ->get();
+
         return compact(
             'tripSummaries',
             'upcomingTripsCount',
             'activeItinerariesCount',
             'totalBudget',
             'nextTrip',
-            'recentEvents'
+            'recentEvents',
+            'pendingInvitations'
         );
     };
 
