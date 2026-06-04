@@ -67,7 +67,7 @@
                     
                     <!-- Form Header & Toggle -->
                     <div class="mb-6 relative z-10">
-                        <div class="bg-slate-200/50 p-1.5 rounded-2xl flex relative mb-6 backdrop-blur-sm">
+                        <div id="auth-toggle" class="bg-slate-200/50 p-1.5 rounded-2xl flex relative mb-6 backdrop-blur-sm">
                             <div id="toggle-slider" class="absolute top-1.5 bottom-1.5 left-1.5 w-[calc(50%-0.375rem)] bg-white rounded-xl shadow-sm transition-transform duration-300 ease-out {{ $isRegister ? 'translate-x-full' : '' }}"></div>
                             <button onclick="switchTab('login')" id="btn-login" class="flex-1 py-2.5 text-sm font-semibold z-10 transition-colors duration-300 {{ $isRegister ? 'text-slate-500 hover:text-slate-700' : 'text-page-text' }}">Sign In</button>
                             <button onclick="switchTab('register')" id="btn-register" class="flex-1 py-2.5 text-sm font-semibold z-10 transition-colors duration-300 {{ $isRegister ? 'text-page-text' : 'text-slate-500 hover:text-slate-700' }}">Create Account</button>
@@ -204,6 +204,40 @@
                             </div>
                         </form>
 
+                        <!-- Change Password Form -->
+                        <form id="form-reset" action="#" method="POST" class="hidden opacity-0 absolute transition-opacity duration-300">
+                            @csrf
+                            <input type="hidden" id="reset-email" name="email">
+                            <input type="hidden" id="reset-otp" name="otp">
+                            <div class="space-y-3 sm:space-y-4">
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-1">New Password</label>
+                                    <div class="relative">
+                                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                            <svg class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+                                        </div>
+                                        <input type="password" id="reset-password" name="password" class="w-full pl-11 pr-4 py-2.5 bg-white/70 border border-slate-200 rounded-xl focus:ring-2 focus:ring-party-1/30 focus:border-party-1 transition-all outline-none text-slate-800 placeholder-slate-400" placeholder="••••••••" required>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-semibold text-slate-700 mb-1">Confirm Password</label>
+                                    <div class="relative">
+                                        <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                                            <svg class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+                                        </div>
+                                        <input type="password" id="reset-password-confirm" name="password_confirmation" class="w-full pl-11 pr-4 py-2.5 bg-white/70 border border-slate-200 rounded-xl focus:ring-2 focus:ring-party-1/30 focus:border-party-1 transition-all outline-none text-slate-800 placeholder-slate-400" placeholder="••••••••" required>
+                                    </div>
+                                    <div id="reset-message" class="text-xs font-semibold text-red-500 mt-1 hidden"></div>
+                                </div>
+                                <button type="submit" id="btn-reset-password" class="w-full btn-primary py-3 rounded-xl text-page-text font-bold text-sm shadow-lg shadow-party-1/20 hover:-translate-y-0.5 transition-transform mt-2">
+                                    Change Password
+                                </button>
+                                <div class="text-center mt-3">
+                                    <a href="#" onclick="switchTab('login'); return false;" class="text-xs font-semibold text-slate-500 hover:text-slate-700 transition-colors">Back to Sign In</a>
+                                </div>
+                            </div>
+                        </form>
+
                         <div id="social-login-section">
                             <div class="mt-6 flex items-center justify-center gap-4">
                                 <div class="h-px bg-slate-200 flex-1"></div>
@@ -212,12 +246,12 @@
                             </div>
 
                             <div class="mt-5 grid grid-cols-2 gap-4">
-                            <button type="button" class="flex items-center justify-center gap-2 py-2.5 border border-slate-200 bg-white/80 hover:bg-white transition-colors rounded-xl text-sm font-semibold text-slate-700 shadow-sm">
+                            <button type="button" class="flex items-center justify-center gap-2 py-2.5 border border-slate-200 bg-white/80 hover:bg-white transition-colors rounded-xl text-sm font-semibold text-slate-700 shadow-sm cursor-pointer">
                                 <svg class="w-5 h-5" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/><path d="M1 1h22v22H1z" fill="none"/></svg>
                                 Google
                             </button>
-                            <button type="button" class="flex items-center justify-center gap-2 py-2.5 border border-slate-200 bg-white/80 hover:bg-white transition-colors rounded-xl text-sm font-semibold text-slate-700 shadow-sm">
-                                <svg class="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.04 2.26-.74 3.58-.8 1.58.016 2.9.46 3.87 1.25-.87 1.05-1.49 1.93-1.44 3.47.05 1.7 1.14 2.81 2.04 3.53-.88 1.41-1.89 3.01-3.05 4.72zm-2.48-15.6c-.05 1.78-1.02 3.16-2.45 3.96-.58-1.57-1.39-2.92-2.31-3.69-.94-.78-2.01-1.36-2.55-1.44.06-1.8 1.01-3.3 2.5-4.14 1.48-.84 3.07-.98 3.94-.96.11 1.35-.07 2.7-.87 3.86z"/></svg>
+                            <button type="button" class="flex items-center justify-center gap-2 py-2.5 border border-slate-200 bg-white/80 hover:bg-white transition-colors rounded-xl text-sm font-semibold text-slate-700 shadow-sm cursor-pointer">
+                                <svg class="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.04 2.26-.74 3.58-.8 1.58.016 2.9.46 3.87 1.25-.87 1.05-1.49 1.93-1.44 3.47.05 1.7 1.14 2.81 2.04 3.53-.88 1.41-1.89 3.01-3.05 4.72zm-2.48-15.6c-.05 1。78-1。02 3。16-2。45 3。96-.58-1。57-1。39-2。92-2。31-3。69-.94-.78-2。01-1。36-2。55-1。44。06-1。8 1。01-3。3 2。5-4。14 1。48-.84 3。07-.98 3。94-.96。11 1。35-.07 2。7-.87 3。86z"/></svg>
                                 Apple
                             </button>
                         </div>
@@ -227,7 +261,7 @@
                 <div class="mt-6 text-center">
                     <p class="text-[11px] text-slate-500 leading-relaxed">
                         By continuing, you agree to TripTogether's <br>
-                        <a href="#" class="text-accent font-semibold hover:underline">Terms of Service</a> and <a href="#" class="text-accent font-semibold hover:underline">Privacy Policy</a>.
+                        <a href="{{ route('terms') }}" class="text-accent font-semibold hover:underline">Terms of Service</a> and <a href="{{ route('privacy') }}" class="text-accent font-semibold hover:underline">Privacy Policy</a>.
                     </p>
                 </div>
             </div>
@@ -239,8 +273,15 @@
     const initialQueryString = window.location.search;
 
     function switchTab(tab) {
+        const otpVerified = window.__otpVerified === true;
+        if (tab === 'reset' && !otpVerified) {
+            tab = 'forgot';
+        }
         const isLogin = tab === 'login';
         const isForgot = tab === 'forgot';
+        const isReset = tab === 'reset';
+        const btnLogin = document.getElementById('btn-login');
+        const btnRegister = document.getElementById('btn-register');
         
         // Clear any server validation errors when switching tabs
         document.querySelectorAll('.text-red-500').forEach(el => el.style.display = 'none');
@@ -253,9 +294,48 @@
             slider.classList.add('translate-x-full');
         }
 
+        const toggle = document.getElementById('auth-toggle');
+        if (toggle) {
+            toggle.style.display = 'flex';
+        }
+
         // Update button text colors
-        document.getElementById('btn-login').className = `flex-1 py-2.5 text-sm font-semibold z-10 transition-colors duration-300 ${(isLogin || isForgot) ? 'text-page-text' : 'text-slate-500 hover:text-slate-700'}`;
-        document.getElementById('btn-register').className = `flex-1 py-2.5 text-sm font-semibold z-10 transition-colors duration-300 ${(isLogin || isForgot) ? 'text-slate-500 hover:text-slate-700' : 'text-page-text'}`;
+        if (btnLogin && btnRegister) {
+            const leftActive = isLogin || isForgot;
+            btnLogin.className = `flex-1 py-2.5 text-sm font-semibold z-10 transition-colors duration-300 ${leftActive ? 'text-page-text' : 'text-slate-500 hover:text-slate-700'}`;
+            btnRegister.className = `flex-1 py-2.5 text-sm font-semibold z-10 transition-colors duration-300 ${leftActive ? 'text-slate-500 hover:text-slate-700' : 'text-page-text'}`;
+
+            if (isForgot || isReset) {
+                btnLogin.innerText = 'Reset Password';
+                btnRegister.innerText = 'Change Password';
+                btnLogin.disabled = false;
+                btnRegister.disabled = false;
+                btnLogin.classList.remove('cursor-default');
+                btnRegister.classList.remove('cursor-default');
+                btnLogin.onclick = () => switchTab('forgot');
+                btnRegister.onclick = () => {
+                    if (!window.__otpVerified) {
+                        switchTab('forgot');
+                        const otpVerifyMessage = document.getElementById('otp-verify-message');
+                        if (otpVerifyMessage) {
+                            otpVerifyMessage.innerText = 'Please verify your OTP first.';
+                            otpVerifyMessage.classList.remove('hidden');
+                        }
+                        return;
+                    }
+                    switchTab('reset');
+                };
+            } else {
+                btnLogin.innerText = 'Sign In';
+                btnRegister.innerText = 'Create Account';
+                btnLogin.disabled = false;
+                btnRegister.disabled = false;
+                btnLogin.classList.remove('cursor-default');
+                btnRegister.classList.remove('cursor-default');
+                btnLogin.onclick = () => switchTab('login');
+                btnRegister.onclick = () => switchTab('register');
+            }
+        }
 
         // Update titles with fade effect
         const title = document.getElementById('form-title');
@@ -268,6 +348,9 @@
             if (isForgot) {
                 title.innerText = 'Reset Password';
                 subtitle.innerText = 'Enter your email and the 6-digit OTP to verify your identity.';
+            } else if (isReset) {
+                title.innerText = 'Change Password';
+                subtitle.innerText = 'Create a new password to access your account.';
             } else if (isLogin) {
                 title.innerText = 'Welcome back';
                 subtitle.innerText = 'Enter your credentials to access your account.';
@@ -283,8 +366,9 @@
         const formLogin = document.getElementById('form-login');
         const formRegister = document.getElementById('form-register');
         const formForgot = document.getElementById('form-forgot');
+        const formReset = document.getElementById('form-reset');
         
-        [formLogin, formRegister, formForgot].forEach(form => {
+        [formLogin, formRegister, formForgot, formReset].forEach(form => {
             if (form) {
                 form.classList.remove('block', 'opacity-100', 'relative');
                 form.classList.add('hidden', 'opacity-0', 'absolute');
@@ -294,6 +378,9 @@
         if (isForgot) {
             formForgot.classList.remove('hidden', 'opacity-0', 'absolute');
             formForgot.classList.add('block', 'opacity-100', 'relative');
+        } else if (isReset) {
+            formReset.classList.remove('hidden', 'opacity-0', 'absolute');
+            formReset.classList.add('block', 'opacity-100', 'relative');
         } else if (isLogin) {
             formLogin.classList.remove('hidden', 'opacity-0', 'absolute');
             formLogin.classList.add('block', 'opacity-100', 'relative');
@@ -307,7 +394,7 @@
         // Toggle social section
         const socialSection = document.getElementById('social-login-section');
         if (socialSection) {
-            socialSection.style.display = isForgot ? 'none' : 'block';
+            socialSection.style.display = (isForgot || isReset) ? 'none' : 'block';
         }
     }
 
@@ -317,8 +404,10 @@
         const otpEmailMessage = document.getElementById('otp-email-message');
         const otpVerifyMessage = document.getElementById('otp-verify-message') || otpEmailMessage;
         const otpRequestUrl = '{{ route('password.otp.request') }}';
+        const otpResetUrl = '{{ route('password.otp.reset') }}';
         const csrfToken = document.querySelector('#form-forgot input[name="_token"]')?.value;
         let otpRequested = false;
+        window.__otpVerified = false;
 
         const showOtpEmailMessage = (text) => {
             if (!otpEmailMessage) {
@@ -404,8 +493,16 @@
                     const payload = await response.json().catch(() => null);
                     showOtpVerifyMessage(payload?.message || 'OTP verified.');
 
-                    otpInput.value = '';
-                    switchTab('login');
+                    window.__otpVerified = true;
+
+                    const resetEmail = document.getElementById('reset-email');
+                    const resetOtp = document.getElementById('reset-otp');
+                    if (resetEmail && resetOtp) {
+                        resetEmail.value = forgotEmail.value;
+                        resetOtp.value = otpInput.value;
+                    }
+
+                    switchTab('reset');
                 } catch (error) {
                     showOtpVerifyMessage('Network error while verifying OTP. Please try again.');
                     verifyBtn.disabled = false;
@@ -417,7 +514,14 @@
         if (sendOtpBtn && forgotEmail && otpEmailMessage) {
             sendOtpBtn.addEventListener('click', async () => {
                 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!forgotEmail.value.trim()) {
+                    showOtpEmailMessage('Please enter your email first.');
+                    forgotEmail.focus();
+                    return;
+                }
+
                 if (!emailRegex.test(forgotEmail.value)) {
+                    showOtpEmailMessage('Please enter a valid email address.');
                     forgotEmail.focus();
                     // Optionally show a quick visual cue
                     forgotEmail.classList.add('ring-2', 'ring-red-500/50', 'border-red-500');
@@ -488,6 +592,137 @@
                     showOtpEmailMessage('Network error while sending OTP. Please try again.');
                     sendOtpBtn.disabled = false;
                     sendOtpBtn.innerText = 'Send OTP';
+                }
+            });
+
+            forgotEmail.addEventListener('input', () => {
+                if (!otpEmailMessage) {
+                    return;
+                }
+                otpEmailMessage.classList.add('hidden');
+            });
+        }
+
+        const resetForm = document.getElementById('form-reset');
+        const resetMessage = document.getElementById('reset-message');
+        if (resetForm) {
+            resetForm.addEventListener('submit', async (event) => {
+                event.preventDefault();
+
+                const resetEmail = document.getElementById('reset-email');
+                const resetOtp = document.getElementById('reset-otp');
+                const resetPassword = document.getElementById('reset-password');
+                const resetPasswordConfirm = document.getElementById('reset-password-confirm');
+                const resetBtn = document.getElementById('btn-reset-password');
+
+                if (!resetEmail?.value || !resetOtp?.value) {
+                    if (resetMessage) {
+                        resetMessage.innerText = 'Please verify your OTP first.';
+                        resetMessage.classList.remove('hidden');
+                    }
+                    switchTab('forgot');
+                    return;
+                }
+
+                if (!resetPassword?.value || resetPassword.value.length < 8) {
+                    if (resetMessage) {
+                        resetMessage.innerText = 'Password must be at least 8 characters.';
+                        resetMessage.classList.remove('hidden');
+                    }
+                    return;
+                }
+
+                if (resetPassword.value !== resetPasswordConfirm?.value) {
+                    if (resetMessage) {
+                        resetMessage.innerText = 'Passwords do not match.';
+                        resetMessage.classList.remove('hidden');
+                    }
+                    return;
+                }
+
+                if (!window.__otpVerified) {
+                    if (resetMessage) {
+                        resetMessage.innerText = 'Please verify your OTP first.';
+                        resetMessage.classList.remove('hidden');
+                    }
+                    return;
+                }
+
+                if (!csrfToken) {
+                    if (resetMessage) {
+                        resetMessage.innerText = 'Missing CSRF token. Please refresh and try again.';
+                        resetMessage.classList.remove('hidden');
+                    }
+                    return;
+                }
+
+                if (resetMessage) {
+                    resetMessage.classList.add('hidden');
+                }
+
+                if (resetBtn) {
+                    resetBtn.disabled = true;
+                    resetBtn.innerText = 'Updating...';
+                }
+
+                try {
+                    const response = await fetch(otpResetUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'X-CSRF-TOKEN': csrfToken,
+                        },
+                        body: JSON.stringify({
+                            email: resetEmail.value,
+                            otp: resetOtp.value,
+                            password: resetPassword.value,
+                            password_confirmation: resetPasswordConfirm.value,
+                        }),
+                    });
+
+                    if (!response.ok) {
+                        const errorPayload = await response.json().catch(() => null);
+                        const errorMessage = errorPayload?.message
+                            || errorPayload?.errors?.password?.[0]
+                            || errorPayload?.errors?.otp?.[0]
+                            || 'Unable to update password. Please try again.';
+                        if (resetMessage) {
+                            resetMessage.innerText = errorMessage;
+                            resetMessage.classList.remove('hidden');
+                        }
+                        if (resetBtn) {
+                            resetBtn.disabled = false;
+                            resetBtn.innerText = 'Change Password';
+                        }
+                        return;
+                    }
+
+                    const payload = await response.json().catch(() => null);
+                    if (resetMessage) {
+                        resetMessage.innerText = payload?.message || 'Password updated. Please sign in.';
+                        resetMessage.classList.remove('hidden');
+                        resetMessage.classList.remove('text-red-500');
+                        resetMessage.classList.add('text-emerald-600');
+                    }
+
+                    window.__otpVerified = false;
+                    otpRequested = false;
+                    if (resetBtn) {
+                        resetBtn.disabled = false;
+                        resetBtn.innerText = 'Change Password';
+                    }
+                    switchTab('login');
+                } catch (error) {
+                    if (resetMessage) {
+                        resetMessage.innerText = 'Network error while updating password. Please try again.';
+                        resetMessage.classList.remove('hidden');
+                    }
+                    if (resetBtn) {
+                        resetBtn.disabled = false;
+                        resetBtn.innerText = 'Change Password';
+                    }
                 }
             });
         }
