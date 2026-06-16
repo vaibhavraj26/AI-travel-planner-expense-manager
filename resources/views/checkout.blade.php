@@ -82,7 +82,7 @@
                         <div id="card-fields">
                             <div class="mb-5">
                                 <label for="cardholder_name" class="block text-xs font-semibold text-slate-700 mb-1">Cardholder Name</label>
-                                <input type="text" id="cardholder_name" name="cardholder_name" class="checkout-input w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-party-1/30 focus:border-party-1 outline-none text-slate-800 placeholder-slate-400" placeholder="John Doe">
+                                <input type="text" id="cardholder_name" name="cardholder_name" class="checkout-input w-full px-4 py-2.5 bg-white border border-slate-200 rounded-xl focus:ring-2 focus:ring-party-1/30 focus:border-party-1 outline-none text-slate-800 placeholder-slate-400" placeholder="Enter the cardholder name">
                                 <p class="text-red-500 text-xs mt-1 hidden" id="err-name">Please enter the cardholder name.</p>
                             </div>
 

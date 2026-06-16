@@ -233,3 +233,13 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/checkout', [AuthController::class, 'processCheckout'])->name('checkout.submit');
 });
+
+if (config('app.debug')) {
+    Route::get('/test-error/{code}', function ($code) {
+        if (view()->exists("errors.{$code}")) {
+            return response()->view("errors.{$code}", [], (int)$code);
+        }
+        abort(404);
+    });
+}
+

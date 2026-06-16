@@ -133,7 +133,7 @@
                                         <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                             <svg class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
                                         </div>
-                                        <input type="text" name="name" value="{{ old('name') }}" class="w-full pl-11 pr-4 py-2.5 bg-white/70 border border-slate-200 rounded-xl focus:ring-2 focus:ring-party-1/30 focus:border-party-1 transition-all outline-none text-slate-800 placeholder-slate-400" placeholder="John Doe" required>
+                                        <input type="text" name="name" value="{{ old('name') }}" class="w-full pl-11 pr-4 py-2.5 bg-white/70 border border-slate-200 rounded-xl focus:ring-2 focus:ring-party-1/30 focus:border-party-1 transition-all outline-none text-slate-800 placeholder-slate-400" placeholder="Enter name" required>
                                     </div>
                                     @error('name') <span class="text-xs text-red-500 mt-1 block">{{ $message }}</span> @enderror
                                 </div>
