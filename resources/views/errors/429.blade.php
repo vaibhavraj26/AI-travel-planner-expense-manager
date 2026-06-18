@@ -3,7 +3,7 @@
 @section('title', 'Traffic Delay')
 
 @section('image')
-<div class="relative w-40 h-40 flex items-center justify-center bg-rose-50 rounded-full border border-rose-100/50 shadow-inner">
+<div class="relative w-52 h-52 sm:w-60 sm:h-60 flex items-center justify-center bg-rose-50 rounded-full border border-rose-100/50 shadow-inner">
     <style>
         @keyframes pulse-red-light {
             0%, 100% { fill: #ef4444; filter: drop-shadow(0 0 2px rgba(239, 68, 68, 0.4)); }
@@ -22,7 +22,7 @@
     </style>
     
     <!-- Traffic Light SVG -->
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-24 h-24 text-[#071022] stoplight-box">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-32 h-32 sm:w-36 sm:h-36 text-[#071022] stoplight-box">
         <!-- Post/Pole -->
         <rect x="47" y="65" width="6" height="25" fill="#a1a09a" stroke="currentColor" stroke-width="1.5" />
         

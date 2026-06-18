@@ -3,7 +3,7 @@
 @section('title', 'Unexpected Turbulence')
 
 @section('image')
-<div class="relative w-40 h-40 flex items-center justify-center bg-rose-50 rounded-full border border-rose-100/50 shadow-inner">
+<div class="relative w-52 h-52 sm:w-60 sm:h-60 flex items-center justify-center bg-rose-50 rounded-full border border-rose-100/50 shadow-inner">
     <style>
         @keyframes turbulent-float {
             0%, 100% { transform: translateY(0) rotate(0deg); }
@@ -35,9 +35,9 @@
         <path class="drifting-cloud-1" d="M15,35 C17,35 18,33 19,33 C20,33 21,34 22,34 C23,34 24,32 25,32 C27,32 28,34 29,34 C30,34 30,35 31,35" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
         <path class="drifting-cloud-2" d="M60,65 C62,65 63,63 64,63 C65,63 66,64 67,64 C68,64 69,62 70,62 C72,62 73,64 74,64 C75,64 75,65 76,65" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
     </svg>
-
+ 
     <!-- Hot Air Balloon Illustration -->
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-24 h-24 relative z-10 text-[#071022] hot-air-balloon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-32 h-32 sm:w-36 sm:h-36 relative z-10 text-[#071022] hot-air-balloon">
         <!-- Balloon Envelope (Stripe Pattern) -->
         <path d="M50,15 C32,15 28,35 34,48 C37,55 44,65 44,68 L56,68 C56,65 63,55 66,48 C72,35 68,15 50,15 Z" fill="var(--party-1)" />
         <!-- Accent stripes -->

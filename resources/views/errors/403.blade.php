@@ -3,7 +3,7 @@
 @section('title', 'Restricted Lounge')
 
 @section('image')
-<div class="relative w-40 h-40 flex items-center justify-center bg-amber-50 rounded-full border border-amber-100/50 shadow-inner">
+<div class="relative w-52 h-52 sm:w-60 sm:h-60 flex items-center justify-center bg-amber-50 rounded-full border border-amber-100/50 shadow-inner">
     <style>
         @keyframes float-suitcase {
             0%, 100% { transform: translateY(0); }
@@ -24,7 +24,7 @@
     
     <!-- Locked Suitcase SVG -->
     <div class="suitcase-wrapper relative z-10">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-24 h-24 text-[#071022]">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-32 h-32 sm:w-36 sm:h-36 text-[#071022]">
             <!-- Suitcase Handle -->
             <path d="M38,30 L38,20 C38,17.8 39.8,16 42,16 L58,16 C60.2,16 62,17.8 62,20 L62,30" stroke="currentColor" stroke-width="3.5" fill="none" stroke-linecap="round" />
             

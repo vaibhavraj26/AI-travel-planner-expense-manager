@@ -3,7 +3,7 @@
 @section('title', 'Engine Maintenance')
 
 @section('image')
-<div class="relative w-40 h-40 flex items-center justify-center bg-violet-50 rounded-full border border-violet-100/50 shadow-inner">
+<div class="relative w-52 h-52 sm:w-60 sm:h-60 flex items-center justify-center bg-violet-50 rounded-full border border-violet-100/50 shadow-inner">
     <style>
         @keyframes spin-gear {
             from { transform: rotate(0deg); }
@@ -24,7 +24,7 @@
     </style>
     
     <!-- Maintenance SVG -->
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-24 h-24 text-[#071022]">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-32 h-32 sm:w-36 sm:h-36 text-[#071022]">
         <!-- Rotating Gear in Background -->
         <g class="gear-svg text-slate-300">
             <path d="M50,34 C41.2,34 34,41.2 34,50 C34,58.8 41.2,66 50,66 C58.8,66 66,58.8 66,50 C66,41.2 58.8,34 50,34 Z M50,58 C45.6,58 42,54.4 42,50 C42,45.6 45.6,42 50,42 C54.4,42 58,45.6 58,50 C58,54.4 54.4,58 50,58 Z" fill="currentColor" />

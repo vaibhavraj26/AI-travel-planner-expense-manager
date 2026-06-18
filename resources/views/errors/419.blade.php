@@ -3,7 +3,7 @@
 @section('title', 'Ticket Expired')
 
 @section('image')
-<div class="relative w-40 h-40 flex items-center justify-center bg-violet-50 rounded-full border border-violet-100/50 shadow-inner">
+<div class="relative w-52 h-52 sm:w-60 sm:h-60 flex items-center justify-center bg-violet-50 rounded-full border border-violet-100/50 shadow-inner">
     <style>
         @keyframes rotate-hourglass {
             0%, 90% { transform: rotate(0deg); }
@@ -24,7 +24,7 @@
     </style>
     
     <!-- Hourglass SVG -->
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-24 h-24 text-[#071022] hourglass-body">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-32 h-32 sm:w-36 sm:h-36 text-[#071022] hourglass-body">
         <!-- Frame top & bottom -->
         <rect x="25" y="15" width="50" height="6" rx="2" fill="var(--party-1)" stroke="currentColor" stroke-width="2" />
         <rect x="25" y="79" width="50" height="6" rx="2" fill="var(--party-1)" stroke="currentColor" stroke-width="2" />

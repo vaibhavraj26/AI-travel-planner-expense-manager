@@ -3,7 +3,7 @@
 @section('title', 'Lost in Transit')
 
 @section('image')
-<div class="relative w-40 h-40 flex items-center justify-center bg-violet-50 rounded-full border border-violet-100/50 shadow-inner">
+<div class="relative w-52 h-52 sm:w-60 sm:h-60 flex items-center justify-center bg-violet-50 rounded-full border border-violet-100/50 shadow-inner">
     <style>
         @keyframes rotate-needle {
             0% { transform: rotate(0deg); }
@@ -29,7 +29,7 @@
     <div class="absolute inset-0 bg-violet-100 rounded-full pulse-layer"></div>
     
     <!-- Compass SVG -->
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-28 h-28 relative z-10 text-[#071022]">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="w-36 h-36 sm:w-40 sm:h-40 relative z-10 text-[#071022]">
         <!-- Compass Outer Ring -->
         <circle cx="50" cy="50" r="44" stroke="currentColor" stroke-width="2" fill="none" class="text-slate-300" />
         <circle cx="50" cy="50" r="38" stroke="currentColor" stroke-width="1.5" fill="none" class="text-slate-200" />
