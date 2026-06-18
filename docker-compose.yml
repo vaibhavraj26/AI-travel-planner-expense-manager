@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: travel-itinerary-manager
+    ports:
+      - "8080:80"
+    env_file:
+      - .env
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+    volumes:
+      # Optional: Persist SQLite database locally if they switch DB_CONNECTION to sqlite
+      - sqlite_data:/var/www/html/storage/database
+
+volumes:
+  sqlite_data:
