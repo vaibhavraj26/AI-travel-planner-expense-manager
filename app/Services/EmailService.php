@@ -34,6 +34,18 @@ class EmailService
         );
     }
 
+    public function sendPasswordResetSuccess(User $user): void
+    {
+        $this->sendNotification(
+            $user->email,
+            'Your password has been reset successfully',
+            'Password updated successfully',
+            'If this was not you, please contact support immediately at <a href="mailto:5860vaibhav@gmail.com" style="color: #f97316; text-decoration: underline;">support@triptogether.com</a>.',
+            'Go to Sign In', 
+            route('login')
+        );
+    }
+
     public function sendPlanUpgraded(User $user): void
     {
         $this->sendNotification(
@@ -152,7 +164,7 @@ class EmailService
             'code' => $code,
         ])->render();
 
-        $text = $heading . "\n\n" . $body;
+        $text = $heading . "\n\n" . strip_tags($body);
 
         if ($code) {
             $text .= "\n\nOTP Code: " . $code;

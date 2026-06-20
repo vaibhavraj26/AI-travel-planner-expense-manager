@@ -88,6 +88,9 @@
                             @endif
                             
                             <div class="space-y-3 sm:space-y-4">
+                                <div id="login-message" class="text-xs font-semibold text-emerald-600 {{ session('success') ? '' : 'hidden' }}" style="{{ session('success') ? '' : 'display: none;' }}">
+                                    {{ session('success') }}
+                                </div>
                                 <div>
                                     <label class="block text-sm font-semibold text-slate-700 mb-1">Email Address</label>
                                     <div class="relative">
@@ -118,7 +121,7 @@
                                         <span class="text-xs text-red-500 mt-1 block">{{ $errors->first('login') }}</span>
                                     @endif
                                 </div>
-                                <button type="submit" class="w-full btn-primary py-3 rounded-xl text-page-text font-bold text-sm shadow-lg shadow-party-1/20 hover:-translate-y-0.5 transition-transform mt-4">
+                                <button type="submit" class="w-full btn-primary py-3 rounded-xl text-page-text font-bold text-sm shadow-lg shadow-party-1/20 hover:-translate-y-0.5 transition-transform mt-4 cursor-pointer">
                                     Sign In to Dashboard
                                 </button>
                             </div>
@@ -157,15 +160,16 @@
                                          <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                              <svg class="h-5 w-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
                                          </div>
-                                         <input type="password" name="password" class="w-full pl-11 pr-12 py-2.5 bg-white/70 border border-slate-200 rounded-xl focus:ring-2 focus:ring-party-1/30 focus:border-party-1 transition-all outline-none text-slate-800 placeholder-slate-400" placeholder="••••••••" required>
+                                         <input type="password" id="register-password" name="password" class="w-full pl-11 pr-12 py-2.5 bg-white/70 border border-slate-200 rounded-xl focus:ring-2 focus:ring-party-1/30 focus:border-party-1 transition-all outline-none text-slate-800 placeholder-slate-400" placeholder="••••••••" required>
                                          <button type="button" onclick="togglePasswordVisibility(this)" class="absolute inset-y-0 right-0 pr-4 flex items-center text-slate-400 hover:text-slate-600 transition-colors focus:outline-none cursor-pointer">
                                              <svg class="h-5 w-5 eye-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                                              <svg class="h-5 w-5 eye-off-icon hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" /></svg>
                                          </button>
                                      </div>
+                                     <div id="register-password-strength" class="text-xs mt-1 font-semibold hidden"></div>
                                     @error('password') <span class="text-xs text-red-500 mt-1 block">{{ $message }}</span> @enderror
                                 </div>
-                                <button type="submit" class="w-full btn-primary py-3 rounded-xl text-page-text font-bold text-sm shadow-lg shadow-party-1/20 hover:-translate-y-0.5 transition-transform mt-4">
+                                <button type="submit" class="w-full btn-primary py-3 rounded-xl text-page-text font-bold text-sm shadow-lg shadow-party-1/20 hover:-translate-y-0.5 transition-transform mt-4 cursor-pointer">
                                     Create Account
                                 </button>
                             </div>
@@ -227,6 +231,7 @@
                                             <svg class="h-5 w-5 eye-off-icon hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" /></svg>
                                         </button>
                                     </div>
+                                    <div id="reset-password-strength" class="text-xs mt-1 font-semibold hidden"></div>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-semibold text-slate-700 mb-1">Confirm Password</label>
@@ -242,7 +247,7 @@
                                     </div>
                                     <div id="reset-message" class="text-xs font-semibold text-red-500 mt-1 hidden"></div>
                                 </div>
-                                <button type="submit" id="btn-reset-password" class="w-full btn-primary py-3 rounded-xl text-page-text font-bold text-sm shadow-lg shadow-party-1/20 hover:-translate-y-0.5 transition-transform mt-2">
+                                <button type="submit" id="btn-reset-password" class="w-full btn-primary py-3 rounded-xl text-page-text font-bold text-sm shadow-lg shadow-party-1/20 hover:-translate-y-0.5 transition-transform mt-2 cursor-pointer">
                                     Change Password
                                 </button>
                                 <div class="text-center mt-3">
@@ -298,6 +303,13 @@
         
         // Clear any server validation errors when switching tabs
         document.querySelectorAll('.text-red-500').forEach(el => el.style.display = 'none');
+        if (tab !== 'login') {
+            const loginMessage = document.getElementById('login-message');
+            if (loginMessage) {
+                loginMessage.classList.add('hidden');
+                loginMessage.style.display = 'none';
+            }
+        }
         
         // Update slider position
         const slider = document.getElementById('toggle-slider');
@@ -312,42 +324,40 @@
             toggle.style.display = 'flex';
         }
 
-        // Update button text colors
+        // Update button text colors and enabled states
         if (btnLogin && btnRegister) {
             const leftActive = isLogin || isForgot;
-            btnLogin.className = `flex-1 py-2.5 text-sm font-semibold z-10 transition-colors duration-300 ${leftActive ? 'text-page-text' : 'text-slate-500 hover:text-slate-700'}`;
-            btnRegister.className = `flex-1 py-2.5 text-sm font-semibold z-10 transition-colors duration-300 ${leftActive ? 'text-slate-500 hover:text-slate-700' : 'text-page-text'}`;
+            
+            // Default reset
+            btnLogin.disabled = false;
+            btnRegister.disabled = false;
+            btnLogin.classList.remove('pointer-events-none', 'opacity-50');
+            btnRegister.classList.remove('pointer-events-none', 'opacity-50');
 
             if (isForgot || isReset) {
                 btnLogin.innerText = 'Reset Password';
                 btnRegister.innerText = 'Change Password';
-                btnLogin.disabled = false;
-                btnRegister.disabled = false;
-                btnLogin.classList.remove('cursor-default');
-                btnRegister.classList.remove('cursor-default');
-                btnLogin.onclick = () => switchTab('forgot');
-                btnRegister.onclick = () => {
-                    if (!window.__otpVerified) {
-                        switchTab('forgot');
-                        const otpVerifyMessage = document.getElementById('otp-verify-message');
-                        if (otpVerifyMessage) {
-                            otpVerifyMessage.innerText = 'Please verify your OTP first.';
-                            otpVerifyMessage.classList.remove('hidden');
-                        }
-                        return;
-                    }
-                    switchTab('reset');
-                };
+                
+                if (isForgot) {
+                    btnRegister.disabled = true;
+                    btnRegister.classList.add('pointer-events-none', 'opacity-50');
+                    btnLogin.onclick = () => switchTab('forgot');
+                    btnRegister.onclick = null;
+                } else {
+                    btnLogin.disabled = true;
+                    btnLogin.classList.add('pointer-events-none', 'opacity-50');
+                    btnLogin.onclick = null;
+                    btnRegister.onclick = () => switchTab('reset');
+                }
             } else {
                 btnLogin.innerText = 'Sign In';
                 btnRegister.innerText = 'Create Account';
-                btnLogin.disabled = false;
-                btnRegister.disabled = false;
-                btnLogin.classList.remove('cursor-default');
-                btnRegister.classList.remove('cursor-default');
                 btnLogin.onclick = () => switchTab('login');
                 btnRegister.onclick = () => switchTab('register');
             }
+
+            btnLogin.className = `flex-1 py-2.5 text-sm font-semibold z-10 transition-colors duration-300 ${leftActive ? 'text-page-text' : 'text-slate-500 hover:text-slate-700'} ${btnLogin.disabled ? 'pointer-events-none opacity-50' : ''}`;
+            btnRegister.className = `flex-1 py-2.5 text-sm font-semibold z-10 transition-colors duration-300 ${leftActive ? 'text-slate-500 hover:text-slate-700' : 'text-page-text'} ${btnRegister.disabled ? 'pointer-events-none opacity-50' : ''}`;
         }
 
         // Update titles with fade effect
@@ -416,6 +426,7 @@
         const forgotEmail = document.getElementById('forgot-email');
         const otpEmailMessage = document.getElementById('otp-email-message');
         const otpVerifyMessage = document.getElementById('otp-verify-message') || otpEmailMessage;
+        const resetMessage = document.getElementById('reset-message');
         const otpRequestUrl = '{{ route('password.otp.request') }}';
         const otpResetUrl = '{{ route('password.otp.reset') }}';
         const csrfToken = document.querySelector('#form-forgot input[name="_token"]')?.value;
@@ -442,6 +453,17 @@
             otpVerifyMessage.style.display = '';
         };
 
+        const showResetMessage = (text, isError = true) => {
+            if (!resetMessage) {
+                return;
+            }
+
+            resetMessage.innerText = text;
+            resetMessage.className = `text-xs font-semibold ${isError ? 'text-red-500' : 'text-emerald-600'} mt-1`;
+            resetMessage.classList.remove('hidden');
+            resetMessage.style.display = '';
+        };
+
         const otpInput = document.getElementById('otp-input');
         const verifyBtn = document.getElementById('btn-verify');
         const otpVerifyUrl = '{{ route('password.otp.verify') }}';
@@ -450,7 +472,7 @@
                 e.target.value = e.target.value.replace(/\D/g, ''); // Allow only numbers
                 if (e.target.value.length === 6) {
                     verifyBtn.disabled = false;
-                    verifyBtn.className = 'w-full btn-primary py-3 rounded-xl text-page-text font-bold text-sm shadow-lg shadow-party-1/20 hover:-translate-y-0.5 transition-all mt-4';
+                    verifyBtn.className = 'w-full btn-primary py-3 rounded-xl text-page-text font-bold text-sm shadow-lg shadow-party-1/20 hover:-translate-y-0.5 transition-all mt-4 cursor-pointer';
                 } else {
                     verifyBtn.disabled = true;
                     verifyBtn.className = 'w-full py-3 rounded-xl font-bold text-sm transition-all mt-4 bg-slate-200 text-slate-400 cursor-not-allowed';
@@ -475,6 +497,7 @@
                 }
 
                 verifyBtn.disabled = true;
+                verifyBtn.innerText = 'Verifying...';
                 verifyBtn.className = 'w-full py-3 rounded-xl font-bold text-sm transition-all mt-4 bg-slate-200 text-slate-400 cursor-not-allowed';
 
                 try {
@@ -499,7 +522,8 @@
                             || 'OTP verification failed. Please try again.';
                         showOtpVerifyMessage(errorMessage);
                         verifyBtn.disabled = false;
-                        verifyBtn.className = 'w-full btn-primary py-3 rounded-xl text-page-text font-bold text-sm shadow-lg shadow-party-1/20 hover:-translate-y-0.5 transition-all mt-4';
+                        verifyBtn.innerText = 'Verify OTP';
+                        verifyBtn.className = 'w-full btn-primary py-3 rounded-xl text-page-text font-bold text-sm shadow-lg shadow-party-1/20 hover:-translate-y-0.5 transition-all mt-4 cursor-pointer';
                         return;
                     }
 
@@ -515,11 +539,17 @@
                         resetOtp.value = otpInput.value;
                     }
 
+                    // Reset button state just in case
+                    verifyBtn.disabled = false;
+                    verifyBtn.innerText = 'Verify OTP';
+                    verifyBtn.className = 'w-full btn-primary py-3 rounded-xl text-page-text font-bold text-sm shadow-lg shadow-party-1/20 hover:-translate-y-0.5 transition-all mt-4 cursor-pointer';
+
                     switchTab('reset');
                 } catch (error) {
                     showOtpVerifyMessage('Network error while verifying OTP. Please try again.');
                     verifyBtn.disabled = false;
-                    verifyBtn.className = 'w-full btn-primary py-3 rounded-xl text-page-text font-bold text-sm shadow-lg shadow-party-1/20 hover:-translate-y-0.5 transition-all mt-4';
+                    verifyBtn.innerText = 'Verify OTP';
+                    verifyBtn.className = 'w-full btn-primary py-3 rounded-xl text-page-text font-bold text-sm shadow-lg shadow-party-1/20 hover:-translate-y-0.5 transition-all mt-4 cursor-pointer';
                 }
             });
         }
@@ -617,7 +647,6 @@
         }
 
         const resetForm = document.getElementById('form-reset');
-        const resetMessage = document.getElementById('reset-message');
         if (resetForm) {
             resetForm.addEventListener('submit', async (event) => {
                 event.preventDefault();
@@ -629,53 +658,40 @@
                 const resetBtn = document.getElementById('btn-reset-password');
 
                 if (!resetEmail?.value || !resetOtp?.value) {
-                    if (resetMessage) {
-                        resetMessage.innerText = 'Please verify your OTP first.';
-                        resetMessage.classList.remove('hidden');
-                    }
+                    showResetMessage('Please verify your OTP first.');
                     switchTab('forgot');
                     return;
                 }
 
                 if (!resetPassword?.value || resetPassword.value.length < 8) {
-                    if (resetMessage) {
-                        resetMessage.innerText = 'Password must be at least 8 characters.';
-                        resetMessage.classList.remove('hidden');
-                    }
+                    showResetMessage('Password must be at least 8 characters.');
                     return;
                 }
 
                 if (resetPassword.value !== resetPasswordConfirm?.value) {
-                    if (resetMessage) {
-                        resetMessage.innerText = 'Passwords do not match.';
-                        resetMessage.classList.remove('hidden');
-                    }
+                    showResetMessage('Passwords do not match.');
                     return;
                 }
 
                 if (!window.__otpVerified) {
-                    if (resetMessage) {
-                        resetMessage.innerText = 'Please verify your OTP first.';
-                        resetMessage.classList.remove('hidden');
-                    }
+                    showResetMessage('Please verify your OTP first.');
                     return;
                 }
 
                 if (!csrfToken) {
-                    if (resetMessage) {
-                        resetMessage.innerText = 'Missing CSRF token. Please refresh and try again.';
-                        resetMessage.classList.remove('hidden');
-                    }
+                    showResetMessage('Missing CSRF token. Please refresh and try again.');
                     return;
                 }
 
                 if (resetMessage) {
                     resetMessage.classList.add('hidden');
+                    resetMessage.style.display = 'none';
                 }
 
                 if (resetBtn) {
                     resetBtn.disabled = true;
                     resetBtn.innerText = 'Updating...';
+                    resetBtn.className = 'w-full py-3 rounded-xl font-bold text-sm transition-all mt-2 bg-slate-200 text-slate-400 cursor-not-allowed';
                 }
 
                 try {
@@ -701,23 +717,13 @@
                             || errorPayload?.errors?.password?.[0]
                             || errorPayload?.errors?.otp?.[0]
                             || 'Unable to update password. Please try again.';
-                        if (resetMessage) {
-                            resetMessage.innerText = errorMessage;
-                            resetMessage.classList.remove('hidden');
-                        }
+                        showResetMessage(errorMessage);
                         if (resetBtn) {
                             resetBtn.disabled = false;
                             resetBtn.innerText = 'Change Password';
+                            resetBtn.className = 'w-full btn-primary py-3 rounded-xl text-page-text font-bold text-sm shadow-lg shadow-party-1/20 hover:-translate-y-0.5 transition-transform mt-2 cursor-pointer';
                         }
                         return;
-                    }
-
-                    const payload = await response.json().catch(() => null);
-                    if (resetMessage) {
-                        resetMessage.innerText = payload?.message || 'Password updated. Please sign in.';
-                        resetMessage.classList.remove('hidden');
-                        resetMessage.classList.remove('text-red-500');
-                        resetMessage.classList.add('text-emerald-600');
                     }
 
                     window.__otpVerified = false;
@@ -725,21 +731,27 @@
                     if (resetBtn) {
                         resetBtn.disabled = false;
                         resetBtn.innerText = 'Change Password';
+                        resetBtn.className = 'w-full btn-primary py-3 rounded-xl text-page-text font-bold text-sm shadow-lg shadow-party-1/20 hover:-translate-y-0.5 transition-transform mt-2 cursor-pointer';
+                    }
+                    const loginMessage = document.getElementById('login-message');
+                    if (loginMessage) {
+                        loginMessage.innerText = 'password reset successfully, login with new password';
+                        loginMessage.classList.remove('hidden');
+                        loginMessage.style.display = '';
                     }
                     switchTab('login');
                 } catch (error) {
-                    if (resetMessage) {
-                        resetMessage.innerText = 'Network error while updating password. Please try again.';
-                        resetMessage.classList.remove('hidden');
-                    }
+                    showResetMessage('Network error while updating password. Please try again.');
                     if (resetBtn) {
                         resetBtn.disabled = false;
                         resetBtn.innerText = 'Change Password';
+                        resetBtn.className = 'w-full btn-primary py-3 rounded-xl text-page-text font-bold text-sm shadow-lg shadow-party-1/20 hover:-translate-y-0.5 transition-transform mt-2 cursor-pointer';
                     }
                 }
             });
         }
     });
+
     function togglePasswordVisibility(button) {
         const relativeDiv = button.closest('.relative');
         const input = relativeDiv.querySelector('input');
@@ -756,5 +768,81 @@
             eyeOffIcon.classList.add('hidden');
         }
     }
+
+    function evaluatePasswordStrength(password) {
+        if (!password) {
+            return { message: '', colorClass: 'hidden' };
+        }
+        if (password.length < 8) {
+            return { message: 'Choose a strong password (at least 8 characters).', colorClass: 'text-red-500' };
+        }
+        const hasLetter = /[a-zA-Z]/.test(password);
+        const hasNumber = /[0-9]/.test(password);
+        const hasSpecial = /[^a-zA-Z0-9]/.test(password);
+        
+        if (!hasLetter || (!hasNumber && !hasSpecial)) {
+            return { message: 'Choose a strong password (mix letters and numbers/symbols).', colorClass: 'text-amber-500' };
+        }
+        return { message: 'Strong password!', colorClass: 'text-emerald-500' };
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Let's bind password strength listeners
+        const registerPass = document.getElementById('register-password');
+        const registerStrength = document.getElementById('register-password-strength');
+        if (registerPass && registerStrength) {
+            registerPass.addEventListener('input', (e) => {
+                const strength = evaluatePasswordStrength(e.target.value);
+                if (strength.message) {
+                    registerStrength.innerText = strength.message;
+                    registerStrength.className = `text-xs mt-1 font-semibold ${strength.colorClass}`;
+                    registerStrength.style.display = '';
+                } else {
+                    registerStrength.className = 'text-xs mt-1 hidden';
+                    registerStrength.style.display = 'none';
+                }
+            });
+        }
+
+        const resetPass = document.getElementById('reset-password');
+        const resetStrength = document.getElementById('reset-password-strength');
+        if (resetPass && resetStrength) {
+            resetPass.addEventListener('input', (e) => {
+                const strength = evaluatePasswordStrength(e.target.value);
+                if (strength.message) {
+                    resetStrength.innerText = strength.message;
+                    resetStrength.className = `text-xs mt-1 font-semibold ${strength.colorClass}`;
+                    resetStrength.style.display = '';
+                } else {
+                    resetStrength.className = 'text-xs mt-1 hidden';
+                    resetStrength.style.display = 'none';
+                }
+            });
+        }
+
+        const loginForm = document.getElementById('form-login');
+        if (loginForm) {
+            loginForm.addEventListener('submit', () => {
+                const btn = loginForm.querySelector('button[type="submit"]');
+                if (btn) {
+                    btn.innerText = 'Signing In...';
+                    btn.className = 'w-full py-3 rounded-xl font-bold text-sm transition-all mt-4 bg-slate-200 text-slate-400 cursor-not-allowed';
+                    setTimeout(() => { btn.disabled = true; }, 0);
+                }
+            });
+        }
+
+        const registerForm = document.getElementById('form-register');
+        if (registerForm) {
+            registerForm.addEventListener('submit', () => {
+                const btn = registerForm.querySelector('button[type="submit"]');
+                if (btn) {
+                    btn.innerText = 'Creating Account...';
+                    btn.className = 'w-full py-3 rounded-xl font-bold text-sm transition-all mt-4 bg-slate-200 text-slate-400 cursor-not-allowed';
+                    setTimeout(() => { btn.disabled = true; }, 0);
+                }
+            });
+        }
+    });
 </script>
 @endsection

@@ -12,7 +12,7 @@
     
 </head>
 <body>
-    @if(!request()->routeIs('login') && !request()->routeIs('register'))
+    @if(request()->routeIs('landing'))
         <x-data-warning />
     @endif
  

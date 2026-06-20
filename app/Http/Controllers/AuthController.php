@@ -233,6 +233,9 @@ class AuthController extends Controller
         $record = DB::table('password_reset_otps')->where('email', $validated['email'])->first();
 
         if (!$record || now()->greaterThan($record->expires_at) || $record->otp !== $validated['otp'] || !$record->verified_at) {
+            if ($request->expectsJson()) {
+                return response()->json(['message' => 'The OTP is invalid or expired. Please verify again.'], 422);
+            }
             return back()->withErrors(['otp' => 'The OTP is invalid or expired. Please verify again.']);
         }
 
@@ -240,9 +243,15 @@ class AuthController extends Controller
         $user->password = Hash::make($validated['password']);
         $user->save();
 
+        $this->emailService->sendPasswordResetSuccess($user);
+
         DB::table('password_reset_otps')->where('email', $validated['email'])->delete();
 
-        return back()->with('success', 'Your password has been reset successfully.');
+        if ($request->expectsJson()) {
+            return response()->json(['message' => 'password reset successfully, login with new pass']);
+        }
+
+        return redirect()->route('login')->with('success', 'password reset successfully, login with new pass');
     }
 
     /**
