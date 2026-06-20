@@ -234,7 +234,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/checkout', [AuthController::class, 'processCheckout'])->name('checkout.submit');
 });
 
-Route::get('/test-perf', function () {
+Route::get('/test-performance', function () {
     $report = [];
     
     $start = defined('LARAVEL_START') ? LARAVEL_START : microtime(true);
