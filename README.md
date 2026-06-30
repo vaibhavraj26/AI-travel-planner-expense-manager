@@ -1,6 +1,6 @@
 # ✈️ tripTogether — Premium Travel Planner
 
-Experience the platform live here: **[Live Link]**(https://travel-itinerary-manager.onrender.com)
+Experience the platform live here: **[Live Link](https://travel-itinerary-manager.onrender.com)**
 
 > Collaborate, plan, and budget your travel itineraries in one beautiful, cohesive dashboard.
 
