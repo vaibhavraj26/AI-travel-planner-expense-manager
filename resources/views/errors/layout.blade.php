@@ -18,14 +18,17 @@
 </head>
 <body class="h-screen flex flex-col justify-between overflow-y-auto md:overflow-y-hidden font-['Sora',sans-serif] bg-[#fdfaff] text-[#071022] antialiased">
     
-    <!-- Top Header Branding -->
     <header class="w-full max-w-7xl mx-auto px-6 py-4 flex items-center justify-between z-30 shrink-0">
-        <a href="{{ Auth::check() ? route('home') : '/' }}" class="flex items-center gap-2 group">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 h-8 text-party-1 transition-transform group-hover:scale-110 duration-300" fill="currentColor">
-                <path d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7z" stroke="none"/>
-                <circle cx="12" cy="9" r="2.5" fill="white" />
-            </svg>
-            <span class="font-bold text-lg text-[#071022] tracking-tight group-hover:text-party-1 transition-colors">triptogether</span>
+        <a href="{{ Auth::check() ? route('home') : '/' }}" class="flex items-center gap-3 group">
+            <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-xl bg-party-1/5 transition-transform group-hover:scale-105 duration-300">
+                <x-application-logo />
+            </div>
+            <div class="leading-tight text-left">
+                <span class="font-['Playfair_Display',serif] font-black text-lg text-page-text tracking-tight block">
+                    trip<span class="text-party-1">Together</span>
+                </span>
+                <span class="text-[9px] text-slate-500 font-bold uppercase tracking-wider block">Premium Travel Planner</span>
+            </div>
         </a>
         
         <div>

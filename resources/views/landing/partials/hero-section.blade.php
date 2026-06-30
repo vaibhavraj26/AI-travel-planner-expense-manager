@@ -1,10 +1,16 @@
 <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
 
     {{-- Top-left logo inside hero (mobile: icon only) --}}
-    <a href="{{ route('landing') }}" class="absolute top-6 left-6 z-30 flex items-center gap-2">
-      
-        <x-application-logo />
-        <span class="font-bold text-lg text-page-text tracking-tight hidden sm:inline">triptogether</span>
+    <a href="{{ route('landing') }}" class="absolute top-6 left-6 z-30 flex items-center gap-3">
+        <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-xl bg-party-1/5">
+            <x-application-logo />
+        </div>
+        <div class="leading-tight hidden sm:block text-left">
+            <span class="font-['Playfair_Display',serif] font-black text-lg text-page-text tracking-tight block">
+                trip<span class="text-party-1">Together</span>
+            </span>
+            <span class="text-[9px] text-slate-500 font-bold uppercase tracking-wider block">Premium Travel Planner</span>
+        </div>
     </a>
 
     {{-- Top-right Sign In button --}}

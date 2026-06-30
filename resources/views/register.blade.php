@@ -19,9 +19,16 @@
                 
                 <!-- Content --> 
                 <div class="absolute inset-0 flex flex-col justify-between p-8 lg:p-10">
-                    <a href="{{ route('landing') }}" class="flex items-center gap-2 group w-max">
-                       <x-application-logo />
-                        <span class="font-bold text-xl tracking-tight text-white">triptogether</span>
+                    <a href="{{ route('landing') }}" class="flex items-center gap-3 group w-max">
+                        <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-xl bg-white/10">
+                            <x-application-logo />
+                        </div>
+                        <div class="leading-tight text-left">
+                            <span class="font-['Playfair_Display',serif] font-black text-xl text-white tracking-tight block">
+                                trip<span class="text-party-1">Together</span>
+                            </span>
+                            <span class="text-[9px] text-slate-300 font-bold uppercase tracking-wider block">Premium Travel Planner</span>
+                        </div>
                     </a>
 
                     <div class="animate-float-up">
@@ -50,13 +57,17 @@
             <div class="w-full max-w-md animate-float-up">
                 
                 <!-- Mobile Logo -->
-                <div class="lg:hidden flex items-center justify-center gap-2 mb-6">
-                    <a href="{{ route('landing') }}" class="flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-10 h-10 text-party-1" fill="none" stroke="currentColor" stroke-width="1.5">
-                          <path d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7z" fill="party-1" stroke="none"/>
-                          <circle cx="12" cy="9" r="2.5" fill="#FFF" />
-                        </svg>
-                        <span class="font-bold text-3xl tracking-tight text-page-text">triptogether</span>
+                <div class="lg:hidden flex items-center justify-center mb-6">
+                    <a href="{{ route('landing') }}" class="flex items-center gap-3">
+                        <div class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-xl bg-party-1/5">
+                            <x-application-logo />
+                        </div>
+                        <div class="leading-tight text-left">
+                            <span class="font-['Playfair_Display',serif] font-black text-2xl text-page-text tracking-tight block">
+                                trip<span class="text-party-1">Together</span>
+                            </span>
+                            <span class="text-[9px] text-slate-500 font-bold uppercase tracking-wider block">Premium Travel Planner</span>
+                        </div>
                     </a>
                 </div>
 

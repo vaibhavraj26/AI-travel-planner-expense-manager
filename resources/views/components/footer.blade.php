@@ -23,11 +23,16 @@
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-10">
             <!-- Brand & App Links -->
             <div class="lg:col-span-2">
-                <a href="{{ route('landing') }}" class="flex items-center gap-2 mb-6">
-                    
-                    <x-application-logo />
-
-                    <span class="font-bold text-2xl tracking-tight text-white">triptogether</span>
+                <a href="{{ route('landing') }}" class="flex items-center gap-3 mb-6">
+                    <div class="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-xl bg-white/10">
+                        <x-application-logo />
+                    </div>
+                    <div class="leading-tight text-left">
+                        <span class="font-['Playfair_Display',serif] font-black text-2xl text-white tracking-tight block">
+                            trip<span class="text-party-1">Together</span>
+                        </span>
+                        <span class="text-[9px] text-slate-400 font-bold uppercase tracking-wider block">Premium Travel Planner</span>
+                    </div>
                 </a>
                 <p class="text-slate-400 text-sm leading-relaxed mb-8 max-w-sm">
                     The ultimate travel itinerary planner. Organize flights, hotels, and activities all in one place, and collaborate with your friends effortlessly.

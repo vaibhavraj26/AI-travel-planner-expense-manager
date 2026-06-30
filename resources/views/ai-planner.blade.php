@@ -60,7 +60,7 @@
             <div class="grid gap-6 sm:grid-cols-2">
                 <div class="space-y-2">
                     <label class="text-xs font-black text-slate-400 uppercase tracking-widest">Destination</label>
-                    <input type="text" name="destination" value="{{ old('destination') }}" placeholder="Goa, Japan, Paris..." required class="w-full px-5 py-3 bg-slate-50 border-2 border-transparent rounded-xl focus:bg-white focus:border-emerald-400 outline-none transition-all">
+                    <input type="text" name="destination" value="{{ request('destination', old('destination')) }}" placeholder="Goa, Japan, Paris..." required class="w-full px-5 py-3 bg-slate-50 border-2 border-transparent rounded-xl focus:bg-white focus:border-emerald-400 outline-none transition-all">
                 </div>
                 <div class="space-y-2">
                     <label class="text-xs font-black text-slate-400 uppercase tracking-widest">Trip Length (days)</label>
